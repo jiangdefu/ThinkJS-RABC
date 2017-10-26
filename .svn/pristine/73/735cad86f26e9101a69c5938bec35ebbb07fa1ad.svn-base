@@ -1,0 +1,35 @@
+.iconList{
+    width: 257px;
+    text-align: center;
+    border: 1px solid #ededed;
+    border-top: none;
+    position: absolute;
+    top: 34px;
+    background-color: #fff;
+    display: none;
+}
+.iconList>.titles{
+    line-height: 34px;
+    padding: 0 10px;
+    border-bottom: 1px solid #ededed;
+}
+.iconList>.titles>i{
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}
+.iconList>.iconContent>ul{
+    padding: 0 2px;
+}
+.iconList>.iconContent>ul>li{
+    list-style: none;
+    float: left;
+}
+.iconList>.iconContent .social-icons li{
+    text-indent:0;
+}
+.iconList>.iconContent .social-icons li>a{
+    width: 31px;
+    text-align: center;
+    line-height: 28px;
+}

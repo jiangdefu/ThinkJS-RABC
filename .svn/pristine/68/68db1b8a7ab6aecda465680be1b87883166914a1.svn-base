@@ -1,0 +1,194 @@
+{% extends "../base/main.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/metroStyle/metroStyle.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
+{% endblock %}
+{% block content %}
+
+<div id="dashboard">
+    <section class="vbox">
+        <section class="scrollable wrapper">
+            <header class="bg-light dk">
+                <div id="toolbar">
+                    {% if pid!=0 %}
+                        <button type="button" class="btn btn-default" onclick="window.history.back()" style="margin-right: 15px;">返回</button>
+                    {% endif %}
+                    <a class="btn btn-default" href="/admin/menu/add" style="margin-right: 15px;" data-toggle="myModal">新增</a>
+                    <a class="btn btn-default" onclick="sort()" style="margin-right: 15px;">排序</a>
+                    <!--<button type="button" class="btn btn-default" onclick="" style="margin-right: 15px;">新增</button>-->
+                    <input type="hidden" name="pid" value="{{pid}}"/>
+                </div>
+            </header>
+            <div id="index">
+                <style>
+                    .table th, .table td{
+                        text-align: center;
+                    }
+                </style>
+                <div class="">
+                      <table id="partent_menu"
+                        data-toggle='table' data-url='/admin/menu/loadmenu' data-method='post'
+                        data-toolbar='#toolbar' data-striped='true' data-show-refresh='true'
+                        data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                        data-query-params='queryParams' data-search="true" data-show-toggle="true">
+                        <thead>
+                            <tr>
+                                <th data-field='code'>编码</th>
+                                <th data-field='name' data-formatter="name_url">名称</th>
+                                <th data-field='url'>地址</th>
+                                <th data-field='sort' data-formatter="sort_input">排序</th>
+                                <th data-field='icon' data-formatter="icon_name">图标</th>
+                                <th data-field='create_time' data-formatter="dateFormatterH">创建时间</th>
+                                <th data-formatter="operation">操作</th>
+                            </tr>
+                        </thead>
+                      </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+<div class="modal fade" id="myModal"></div>
+<!-- END PAGE CONTAINER-->
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table.js"></script>
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/static/common/plugins/zTree/js/jquery.ztree.all.min.js"></script>
+<script>
+    // 表格过滤条件
+    function queryParams(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "pid":"{{pid}}",
+            "param":params.search
+        };
+        return temp;
+    };
+    // 表格过滤条件
+    function queryParamsAdd(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "gid":$("input[name='gid']").val(),
+            "param":params.search
+        };
+        return temp;
+    };
+    function sort(){
+        for(var i= 0,arr=[];i<$("input.sort").length;i++){
+            var obj={
+                "id"    :$($("input.sort")[i]).attr("name"),
+                "sort"  :$($("input.sort")[i]).val()
+            };
+            arr.push(obj);
+        }
+        $.ajax({
+            type:"post",
+            url:"/admin/menu/sort",
+            data:{menu:JSON.stringify(arr)},
+            success:function(res){
+                if(res.status==1){
+                    $('.table').bootstrapTable('refresh');
+                }else{
+                    toastr.warning(res.msg);
+                }
+            }
+        })
+    }
+    function sort_input(value,row,index){
+        return "<input type='number' class='sort' name='"+row.id+"' value='"+value+"' style='width:30px;margin:0;height:9px'/>"
+    }
+    function name_url(value,row,index){
+        return "<a href='/admin/menu/index?pid="+row.id+"'>"+value+"</a>";
+    }
+    function icon_name(value,row,index){
+        return "<i class='"+value+"'></i>";
+    }
+    function dateFormatterH(value, row, index) {
+        return [
+            new Date(value).Format("yyyy-MM-dd hh:mm:ss")
+        ];
+    }
+    function operation(value, row, index) {
+        var s = "<a class='btn label-success mini' href='/admin/menu/edit?id="+row.id+"' data-toggle='myModal'><i class='icon-pencil'></i>&nbsp;编辑</a>&nbsp;&nbsp;";
+        var b = "<a class='btn label-warning mini' data-href='/admin/menu/del' data-toggle='del' data-confirm='yes' data-id='"+row.id+"'><i class='icon-remove'></i>&nbsp;删除</a>";
+        return s+b;
+    }
+    function add_save() {
+        if ($("input[name='code']").val() == "") {
+            toastr.warning("编码不能为空");
+            return false;
+        }
+        if ($("input[name='menu_name']").val() == "") {
+            toastr.warning("名称不能为空");
+            return false;
+        }
+        if ($("input[name='sort']").val() == "") {
+            toastr.warning("排序不能为空");
+            return false;
+        }
+        if ($("input[name='icon']").val() == "") {
+            toastr.warning("图标不能为空");
+            return false;
+        }
+        var num = $("input[name='ismenu']").prop("checked") ? 0 : 1;
+        var data = {
+            pid:$("input[name='pid']").val(),
+            code: $("input[name='code']").val(),
+            url: $("input[name='url']").val(),
+            ismenu: num,
+            name: $("input[name='menu_name']").val(),
+            icon: $("input[name='icon']").val(),
+            sort: $("input[name='sort']").val()
+        }
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/admin/menu/addmenu",
+            data: data,
+            success: function (res) {
+                if(res.status==1){
+                    $("#add_close").click();
+                    $('.table').bootstrapTable('refresh');
+                }else{
+                    toastr.warning(res.msg);
+                }
+            }
+        })
+    }
+    $(document).on("click",".icon>li>a",function(){
+        $(this).parents(".icon").prev().children("input[name='icon']").val($(this).attr("class"));
+        $(".icon").hide();
+    });
+    $(document).on("click","input[name='icon']",function(){
+        $(this).parent().next().show();
+    });
+    $(document).on("click",".add-on",function(){
+        $(".iconList").toggle();
+    })
+    function prevList(ele){
+        var num=$(ele).parent().attr("num");
+        if(num!=1){
+            //请求数据
+            num--;
+            $.ajax({
+                type:"post",
+                data:{}
+            })
+        }
+    }
+    function nextList(ele){
+        var num=$(ele).parent().attr("num");
+        //请求数据
+    }
+    $(document).on("click",".icon-name",function(){
+        $(".iconList").toggle();
+        $("input[name='icon']").val($(this).attr("data-value"));
+    })
+</script>
+{% endblock %}

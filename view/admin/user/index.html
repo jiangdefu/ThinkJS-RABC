@@ -1,0 +1,127 @@
+{% extends "../base/main.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/metroStyle/metroStyle.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
+{% endblock %}
+{% block content %}
+<div class="row" style="height: 500px;">
+    <div class="col-sm-3" style="height: 500px;">
+        <div class="portlet box" style="height: 100%;">
+            <div class="portlet-title" style="background-color:green">
+                <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>用户组</div>
+                <div class="tools"></div>
+            </div>
+            <div class="portlet-body">
+                <ul id="treeDemo" class="ztree" style="border:none;margin-top: 0;"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8" style="height: 500px;">
+        <div class="portlet box" style="height: 100%;">
+            <div class="portlet-title" style="background-color:green">
+                <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>用户列表</div>
+                <div class="tools"></div>
+            </div>
+            <div class="portlet-body">
+                <div id="toolbar">
+                    <a class="btn btn-default" id="userAdd" href="/admin/user/add" style="margin-right: 15px;" data-toggle="myModal" disabled="disabled">新增</a>
+                </div>
+                <style>
+                    .table th, .table td{
+                        text-align: center;
+                    }
+                </style>
+                <table id="userTable"
+                       data-toggle='table' data-url='/admin/user/loaduser' data-method='get'
+                       data-toolbar='#toolbar' data-striped='true' data-show-refresh='true'
+                       data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                       data-query-params='queryParams' data-search="true" data-show-toggle="true">
+                    <thead>
+                    <tr>
+                        <th data-field='code'>编码</th>
+                        <th data-field='username'>名称</th>
+                        <th data-field='email'>邮箱</th>
+                        <th data-field='phone'>电话</th>
+                        <th data-field='status' data-formatter="statusFormat">是否启用</th>
+                        <th data-formatter="operation">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"></div>
+<input type="hidden" name="gid" value="0"/>
+<!-- END PAGE CONTAINER-->
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table.js"></script>
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/static/common/plugins/zTree/js/jquery.ztree.all.min.js"></script>
+<script>
+    // 表格过滤条件
+    function queryParams(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "gid":$("input[name='gid']").val(),
+            "param":params.search
+        };
+        return temp;
+    };
+    var setting = {
+        view: {
+            showIcon: true
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey:"id",
+                pIdKey:"pid",
+                rootPid:-1
+            }
+        },
+        async:{
+            url:"/admin/usergroup/loadtree",
+            enable:true,
+            type:"post"
+        },
+        callback:{
+            onClick:function(event,treeId,treeNode){
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                if(treeNode.isParent){
+                    if(treeNode.open){
+                        treeObj.expandNode(treeNode, false, true, true);
+                    }else{
+                        treeObj.expandNode(treeNode, true, true, true);
+                    }
+                }else{
+                    $("#userAdd").removeAttr("disabled");
+                    $("input[name='gid']").val(treeNode.id);
+                    $('#userTable').bootstrapTable('refresh');
+                }
+              return;
+            }
+        }
+    };
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting,null);
+    });
+    function operation(value, row, index) {
+        var s = "<a class='btn label-success mini' href='/admin/user/edit?id="+row.id+"' data-toggle='myModal'><i class='icon-pencil'></i>&nbsp;编辑</a>&nbsp;&nbsp;";
+        var b = "<a class='btn label-warning mini' data-href='/admin/user/del' data-toggle='del' data-confirm='yes' data-id='"+row.id+"'><i class='icon-remove'></i>&nbsp;删除</a>";
+        return s+b;
+    }
+    function statusFormat(value,row,index){
+        if(value == 0){
+            return "<a href='/admin/user/status' data-value="+value+" data-id="+row.id+" data-toggle='status'><i class='fa fa-times text-error'></i></a>"
+        }else if(value == 1){
+            return "<a href='/admin/user/status' data-value="+value+" data-id="+row.id+" data-toggle='status'><i class='fa fa-check text-success'></i></a>"
+        }
+    }
+
+</script>
+{% endblock %}

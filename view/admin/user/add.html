@@ -1,0 +1,117 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" type='button' data-dismiss='modal' aria-hidden='true'></button>
+            <h4 class="modal-title" id="ajaxModal">新增用户 </h4>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                </div>
+                <div class="panel-body">
+                    <form id="add_user_group_form" action="" class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">编码</label>
+                            <div class="controls">
+                                <input type="text" name="code" class="m-wrap" />
+                                <span class="help-inline"> <i class="icon-exclamation-sign text-info"></i> 编码必须唯一</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">名称</label>
+                            <div class="controls">
+                                <input type="text" name="name" class="m-wrap" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">电话</label>
+                            <div class="controls">
+                                <input type="text" name="name" class="m-wrap" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">email</label>
+                            <div class="controls">
+                                <input type="text" name="name" class="m-wrap" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">性别</label>
+                            <div class="controls">
+                                <label class="radio"><input type="radio" name="sex" value="2" checked/>女</label>
+                                <label class="radio"><input type="radio" name="sex" value="1"  />男</label> 
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">启用</label>
+                            <div class="controls">
+                                <label class="radio"><input type="radio" name="status" value="1" checked/>是</label>
+                                <label class="radio"><input type="radio" name="status" value="0"  />否</label> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="add_close" type="button" data-dismiss='modal' style="display: none;"></button>
+            <button class="btn btn-default blue" type='button'  onclick="add_save()">
+                <span class="glyphicon glyphicon-remove"> <i class="icon-ok"></i>保存</span>
+            </button>
+            <button class="btn btn-default" type='button' data-dismiss='modal'>
+                <span class="glyphicon glyphicon-remove">取消</span>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    function add_save() {
+        if ($("input[name='code']").val() == "") {
+            toastr.warning("编码不能为空");
+            return false;
+        }
+        if ($("input[name='menu_name']").val() == "") {
+            toastr.warning("名称不能为空");
+            return false;
+        }
+        if ($("input[name='url']").val() == "") {
+            toastr.warning("地址不能为空");
+            return false;
+        }
+        if ($("input[name='sort']").val() == "") {
+            toastr.warning("排序不能为空");
+            return false;
+        }
+        if ($("input[name='icon']").val() == "") {
+            toastr.warning("图标不能为空");
+            return false;
+        }
+        var num = $("input[name='ismenu']").prop("checked") ? 0 : 1;
+        var data = {
+            pid:$("input[name='pid']").val(),
+            code: $("input[name='code']").val(),
+            url: $("input[name='url']").val(),
+            ismenu: num,
+            name: $("input[name='menu_name']").val(),
+            icon: $("input[name='icon']").val(),
+            sort: $("input[name='sort']").val()
+        }
+        console.log(data);
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/admin/menu/addmenu",
+            data: data,
+            success: function (res) {
+                if(res.status==1){
+                    $("#add_close").click();
+                    $('#dictgroupTable').bootstrapTable('refresh');
+                }else{
+                    toastr.warning(res.msg);
+                }
+            }
+        })
+    }
+</script>

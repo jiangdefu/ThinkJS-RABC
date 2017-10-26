@@ -1,0 +1,42 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/admin/controller/usergroup.js"
+    ],
+    "names": [
+        "init",
+        "http",
+        "indexAction",
+        "display",
+        "loadusergroupAction",
+        "model",
+        "loadUserGroupTable",
+        "param",
+        "result",
+        "json",
+        "loadtreeAction",
+        "loaduserGroupTree",
+        "addAction",
+        "addusergroupAction",
+        "rsp",
+        "status",
+        "msg",
+        "think",
+        "config",
+        "userGroup",
+        "delstatus",
+        "isEmpty",
+        "code",
+        "pid",
+        "name",
+        "briefname",
+        "addUserGroup",
+        "delAction",
+        "delUserGroup"
+    ],
+    "mappings": "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",
+    "file": "../../../src/admin/controller/usergroup.js",
+    "sourcesContent": [
+        "// +----------------------------------------------------------------------\r\n// | ThinkJS-RABC [ 通用权限管理系统 ]\r\n// +----------------------------------------------------------------------\r\n// | Nanjing Digital Technology Co., Ltd.\r\n// +----------------------------------------------------------------------\r\n// | Copyright (c) 2017 http://www.51-health.com All rights reserved.\r\n// +----------------------------------------------------------------------\r\n// | Author: Devlin <Devlinheart@qq.com>\r\n// +----------------------------------------------------------------------\r\n// | Create: 2017-06-20\r\n// +----------------------------------------------------------------------\r\n\r\n'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\r\n    init(http){\r\n        this.http = http;\r\n    }\r\n    indexAction(){\r\n        return this.display();\r\n    }\r\n    /**\r\n     * 加载表格\r\n     */\r\n    async loadusergroupAction(){\r\n        let result = await this.model(\"usergroup\").loadUserGroupTable(this.param(\"pid\"),this.param(\"offset\"),this.param(\"limit\"),\"id\",this.param(\"param\"));\r\n        return this.json(result);\r\n    }\r\n    /**\r\n     * 加载用户组树节点\r\n     */\r\n    async loadtreeAction(){\r\n        let result =  await this.model(\"usergroup\").loaduserGroupTree();\r\n        return this.json(result);\r\n    }\r\n    /**\r\n     * 新增用户组\r\n     */\r\n    addAction(){\r\n        return this.display();\r\n    }\r\n    async addusergroupAction(){\r\n         let rsp = {\r\n            status:-1,\r\n            msg:think.config(\"message.empty_param\")\r\n        }\r\n        let userGroup = {\r\n            status:1,\r\n            delstatus:1\r\n        };\r\n        if(!think.isEmpty(this.param(\"code\"))){\r\n            userGroup.code = this.param(\"code\");\r\n        }\r\n        if(!think.isEmpty(this.param(\"status\"))&&this.param(\"status\")=='on'){\r\n            userGroup.status = 1;\r\n        }\r\n        else{\r\n            userGroup.status = 0;\r\n        }\r\n        userGroup.pid = this.param(\"pid\")||0;\r\n        if(!think.isEmpty(this.param(\"name\"))){\r\n            userGroup.name = this.param(\"name\");\r\n            userGroup.briefname = this.param(\"name\");            \r\n        }\r\n        let result = await this.model(\"usergroup\").addUserGroup(userGroup);\r\n        if(!think.isEmpty(result)){\r\n            if(result.status==1){\r\n                rsp.status = result.status;\r\n                rsp.msg = think.config(\"message.success_msg\");\r\n            }\r\n            else if(result.status==2){\r\n                rsp.status = 0;\r\n                rsp.msg = think.config(\"message.data_exist_msg\");\r\n            }\r\n            else{\r\n                rsp.status = 0;\r\n                rsp.msg = think.config(\"message.fail_msg\");\r\n            }\r\n        }\r\n        return this.json(rsp);\r\n    }\r\n    /**\r\n     * 删除\r\n     */\r\n    async delAction(){\r\n          let rsp = {\r\n            status:0,\r\n            msg:think.config(\"message.empty_param\")\r\n        }\r\n        if(!think.isEmpty(this.param(\"id\"))){\r\n            let result = await this.model(\"usergroup\").delUserGroup(this.param(\"id\"));\r\n            if(!think.isEmpty(result)){\r\n                rsp.status = 1\r\n                rsp.msg = think.config(\"message.del_success_msg\");\r\n            }\r\n            else{\r\n                 rsp.msg = think.config(\"message.del_fail_msg\");\r\n            }\r\n        }\r\n        return this.json(rsp);\r\n    }\r\n}"
+    ]
+}

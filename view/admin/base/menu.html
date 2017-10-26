@@ -1,0 +1,91 @@
+<div class="page-sidebar nav-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->        
+    <ul class="page-sidebar-menu">
+        <li>
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            <div class="sidebar-toggler hidden-phone"></div>
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        </li>
+        <li>
+            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+            <form class="sidebar-search">
+                <div class="input-box">
+                    <a href="javascript:;" class="remove"></a>
+                    <input type="text" placeholder="Search..." />
+                    <input type="button" class="submit" value=" " />
+                </div>
+            </form>
+            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+        </li>
+        {% if controller.menu %}
+            {% for item in controller.menu%}
+                {% if item.children and item.children.length>0 %}
+                    {% if controller.current_menu.parent.id == item.id %}
+                        <li class="active">
+                            <a href="javascript:void(0)">
+                                <i class="{{item.icon}}"></i>
+                                <span class="title">{{item.name}}</span>
+                                <span class="selected "></span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" style="display: block;">
+                                {% for list in item.children%}
+                                {% if controller.current_menu.child.id == list.id %}
+                                <li class="active">
+                                    {% else %}
+                                <li>
+                                    {% endif %}
+                                    <a href="{{list.url}}">
+                                        <i class="{{list.icon}}"></i>&nbsp;&nbsp;
+                                        {{list.name}}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="{{item.icon}}"></i>
+                                <span class="title">{{item.name}}</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {% for list in item.children%}
+                                {% if controller.current_menu.child.id == list.id %}
+                                <li class="active">
+                                    {% else %}
+                                <li>
+                                    {% endif %}
+                                    <a href="{{list.url}}">
+                                        <i class="{{list.icon}}"></i>&nbsp;&nbsp;
+                                        {{list.name}}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% if controller.current_menu.parent.id == item.id %}
+                        <li class="active">
+                            <a href="{{item.url}}">
+                                <i class="{{item.icon}}"></i>
+                                <span class="selected "></span>
+                                <span>{{item.name}}</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{item.url}}">
+                                <i class="{{item.icon}}"></i>
+                                <span>{{item.name}}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <!-- END SIDEBAR MENU -->
+</div>

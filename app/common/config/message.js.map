@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/common/config/message.js"
+    ],
+    "names": [
+        "empty_param",
+        "success_msg",
+        "fail_msg",
+        "del_success_msg",
+        "del_fail_msg",
+        "data_exist_msg"
+    ],
+    "mappings": "AAAA;AACA;;;;;kBAGe;AACXA,iBAAyB,MADd;AAEXC,iBAAyB,MAFd;AAGXC,cAAyB,MAHd;AAIXC,qBAAyB,MAJd;AAKXC,kBAAyB,MALd;AAMXC,oBAAyB;AANd,C",
+    "file": "../../../src/common/config/message.js",
+    "sourcesContent": [
+        "'use strict';\r\n/**\r\n * config\r\n */\r\nexport default {\r\n    empty_param             :\"参数为空\",\r\n    success_msg             :\"操作成功\",\r\n    fail_msg                :\"操作失败\",\r\n    del_success_msg         :\"删除成功\",\r\n    del_fail_msg            :\"删除失败\",\r\n    data_exist_msg          :\"添加数据重复\"\r\n};"
+    ]
+}

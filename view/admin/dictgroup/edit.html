@@ -1,0 +1,117 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" type='button' data-dismiss='modal' aria-hidden='true'></button>
+            <h4 class="modal-title" id="ajaxModal"></h4>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <form action="" class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">父级菜单</label>
+                            <div class="controls" id="zTree">
+                                <input type="text" name="pidName" class="m-wrap" value="{{menu.pidName}}"/>
+                                <ul id="treeDemo" class="ztree"></ul>
+                            </div>
+
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">编码</label>
+                            <div class="controls">
+                                <input type="text" name="code" class="m-wrap" value="{{menu.code}}"/>
+                                <span class="help-inline"> <i class="icon-exclamation-sign text-info"></i> 编码必须唯一</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">名称</label>
+                            <div class="controls">
+                                <input type="text" name="menu_name" class="m-wrap"  value="{{menu.name}}"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">地址</label>
+                            <div class="controls">
+                                <input type="text" name="url" class="m-wrap"  value="{{menu.url}}"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">排序</label>
+                            <div class="controls">
+                                <input type="text" name="sort" class="m-wrap" value="{{menu.sort}}"/>
+                            </div>
+                        </div>
+                        <div class="control-group" style="position: relative;">
+                            <label class="control-label">图标</label>
+                            <div class="controls">
+                                <input type="text" name="icon" class="m-wrap" readonly  value="{{menu.icon}}"/>
+                            </div>
+                            <ul class="social-icons icon" style="width: 400px;position: absolute; left: 50%;margin-left: -200px;top: 40px;display: none;z-index: 100;background-color: #fff ">
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+                                <li>
+                                    <a class="amazon"></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">是否菜单</label>
+                            <div class="controls">
+                                <div class="switch" data-on="primary" data-off="info">
+                                    {% if menu.ismenu == 0 %}
+                                    <input type="checkbox" checked class="toggle" name="ismenu"/>
+                                    {% else %}
+                                    <input type="checkbox" class="toggle" name="ismenu"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="compile_close" data-dismiss='modal' style="display: none;"></button>
+            <button class="btn btn-default" type='button'  onclick="compile_save()">
+                <span class="glyphicon glyphicon-remove">保存</span>
+            </button>
+            <button class="btn btn-default" type='button' data-dismiss='modal'>
+                <span class="glyphicon glyphicon-remove">取消</span>
+            </button>
+        </div>
+    </div>
+</div>

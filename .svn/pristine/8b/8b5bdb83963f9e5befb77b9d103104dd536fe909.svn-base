@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Think-RABC | 基于ThinkJS的权限管理系统</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="/static/common/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/common/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="/static/common/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/static/common/plugins/select2/select2_metro.css" />   
+    <link rel="stylesheet" type="text/css" href="/static/common/plugins/toastr-master/toastr.css" />
+    <link rel="stylesheet" type="text/css" href="/static/common/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css" />
+    <link rel="stylesheet" type="text/css" href="/static/common/css/sweetalert.css" />
+    <link rel="stylesheet" type="text/css" href="/static/common/css/common.css" />
+</head>

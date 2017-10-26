@@ -1,0 +1,47 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/admin/controller/user.js"
+    ],
+    "names": [
+        "init",
+        "http",
+        "indexAction",
+        "display",
+        "loginAction",
+        "isAjax",
+        "think",
+        "isEmpty",
+        "post",
+        "fail",
+        "config",
+        "md5",
+        "toUpperCase",
+        "model",
+        "findUser",
+        "user",
+        "session",
+        "success",
+        "url",
+        "lockAction",
+        "locked",
+        "password",
+        "param",
+        "curr_url",
+        "in_array",
+        "redirect",
+        "assign",
+        "logoutAction",
+        "profileAction",
+        "loaduserAction",
+        "loadUserTable",
+        "result",
+        "json",
+        "addAction"
+    ],
+    "mappings": "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",
+    "file": "../../../src/admin/controller/user.js",
+    "sourcesContent": [
+        "// +----------------------------------------------------------------------\r\n// | ThinkJS-RABC [ 通用权限管理系统 ]\r\n// +----------------------------------------------------------------------\r\n// | Nanjing Digital Technology Co., Ltd.\r\n// +----------------------------------------------------------------------\r\n// | Copyright (c) 2017 http://www.51-health.com All rights reserved.\r\n// +----------------------------------------------------------------------\r\n// | Author: Devlin <Devlinheart@qq.com>\r\n// +----------------------------------------------------------------------\r\n// | Create: 2017-06-20\r\n// +----------------------------------------------------------------------\r\n\r\n'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\r\n    init(http){\r\n        this.http = http;\r\n    }\r\n\r\n    indexAction(){\r\n        return this.display();\r\n    }\r\n    /**\r\n     * 用户登陆\r\n     */\r\n    async loginAction(){\r\n        if(this.isAjax()){\r\n            if(think.isEmpty(this.post(\"username\"))){\r\n                return this.fail(think.config(\"msg.login_username_empty\"));\r\n            }\r\n            if(think.isEmpty(this.post(\"password\"))){\r\n                return this.fail(think.config(\"msg.login_password_empty\"));\r\n            }\r\n            if(think.config(\"superlogin\")){\r\n                if(this.post(\"username\")==think.config(\"superuser\")&&think.md5(this.post(\"password\")).toUpperCase()==think.config(\"superpassword\").toUpperCase()){\r\n                    let user  = await this.model(\"user\").findUser(this.post(\"username\"),think.md5(this.post(\"password\")).toUpperCase());\r\n                    if(!think.isEmpty(user)){\r\n                        await this.session(\"userinfo\",user);\r\n                        return this.success({url:\"/admin/main/index\"},'登陆成功');\r\n                    }\r\n                    else{\r\n                        return this.fail(-1,think.config(\"msg.login_user_not_exist\")); \r\n                    }\r\n                }\r\n                else{\r\n                    return this.fail(-1,think.config(\"msg.login_password_incorrect\"));\r\n                }\r\n            }\r\n            else{\r\n                let user  = await this.model(\"user\").findUser(this.post(\"username\"),think.md5(this.post(\"password\")).toUpperCase());\r\n                if(!think.isEmpty(user)){\r\n                    await this.session(\"userinfo\",user);\r\n                    return this.success({url:\"/admin/main/index\"},'登陆成功');\r\n                }\r\n                else{\r\n                    return this.fail(-1,think.config(\"msg.login_user_not_exist\")); \r\n                }\r\n            }\r\n        }\r\n        else{\r\n            return this.display();\r\n        }       \r\n    }\r\n    /**\r\n     * 锁屏\r\n     */\r\n    async lockAction(){\r\n        let user = await this.session(\"userinfo\");\r\n        if(this.isAjax()){\r\n            if(!think.isEmpty(user)){\r\n                if(user.locked){\r\n                    if(user.password.toUpperCase()==think.md5(this.param(\"password\")).toUpperCase()){\r\n                        user.locked = false;\r\n                        await this.session(\"userinfo\",user);\r\n                        let url = \"/admin/main/index\";\r\n                        if(!think.isEmpty(user.curr_url)&&user.curr_url!=think.config(\"lock_add\")&&!in_array(user.curr_url,think.config(\"login_pass_add\"))){\r\n                            url = user.curr_url;\r\n                        }\r\n                        return this.success({url:url},\"登陆成功\");\r\n                    }\r\n                    else{\r\n                        return this.fail(-1,\"登陆失败\");\r\n                    } \r\n                }\r\n            }\r\n            else{\r\n                return this.redirect(\"/admin/user/login\");\r\n            }\r\n        }\r\n        else{\r\n            if(!think.isEmpty(user)){\r\n                user.locked = true;\r\n                await this.session(\"userinfo\",user);\r\n                this.assign(\"userinfo\",user);\r\n                return this.display();\r\n            }\r\n            else{\r\n                return this.redirect(\"/admin/user/login\");\r\n            }\r\n        }\r\n    }\r\n    /**\r\n     * 退出登陆\r\n     */\r\n    async logoutAction(){\r\n        await this.session(\"userinfo\",null);\r\n        return this.redirect(\"/admin/user/login\");\r\n    }\r\n    /**\r\n     * 个人信息\r\n     */\r\n    async profileAction(){\r\n        return this.display();\r\n    }\r\n    /**\r\n     * 加载表格用户\r\n     */\r\n    async loaduserAction(){\r\n        let result = await this.model(\"user\").loadUserTable(this.param(\"gid\")||0,this.param(\"offset\"),this.param(\"limit\"),\"id\",this.param(\"param\"));\r\n        return this.json(result);\r\n    }\r\n    \r\n    /**\r\n     * 新增用户\r\n     */\r\n    async addAction(){\r\n\r\n        return this.display();\r\n    }\r\n\r\n}"
+    ]
+}

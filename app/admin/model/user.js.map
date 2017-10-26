@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/admin/model/user.js"
+    ],
+    "names": [
+        "findUser",
+        "username",
+        "password",
+        "model",
+        "where",
+        "delstatus",
+        "find",
+        "loadUserTable",
+        "gid",
+        "offset",
+        "limit",
+        "order",
+        "param",
+        "str_obj",
+        "think",
+        "isEmpty",
+        "name",
+        "select",
+        "data",
+        "count",
+        "total",
+        "rows",
+        "base"
+    ],
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AAEA;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAII;;;;;qBAKMA,Q;6GAASC,Q,EAASC,Q;;;;;6DACb,KAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB,EAACH,UAASA,QAAV,EAAmBC,UAASA,QAA5B,EAAqCG,WAAU,CAA/C,EAAzB,EAA4EC,IAA5E,E;;;;;;;;;;;;;;;;;AAGT;;;;;;;;;;qBAQIC,a;+GAAcC,G,EAAIC,M,EAAOC,K,EAAMC,K,EAAMC,K;;;;;;AACnCC,mC,GAAU,EAACR,WAAU,CAAX,E;;AACd,gCAAG,CAACS,MAAMC,OAAN,CAAcP,GAAd,CAAD,IAAqBA,OAAK,CAA7B,EAA+B;AAC3BK,wCAAQL,GAAR,GAAcA,GAAd;AACH;AACD,gCAAG,CAACM,MAAMC,OAAN,CAAcH,KAAd,CAAJ,EAAyB;AACrBC,wCAAQG,IAAR,GAAeJ,KAAf;AACH;;mCACgB,KAAKT,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyBS,OAAzB,EAAkCF,KAAlC,CAAyCA,QAAM,OAA/C,EAAwDD,KAAxD,CAA8DD,MAA9D,EAAqEC,KAArE,EAA4EO,MAA5E,E;;;AAAbC,gC;;mCACc,KAAKf,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyBS,OAAzB,EAAkCM,KAAlC,E;;;AAAdA,iC;8DACG,EAACC,OAAMD,KAAP,EAAaE,MAAKH,IAAlB,E;;;;;;;;;;;;;;;;;;EA5BcJ,MAAMX,KAAN,CAAYmB,I",
+    "file": "../../../src/admin/model/user.js",
+    "sourcesContent": [
+        "// +----------------------------------------------------------------------\r\n// | ThinkJS-RABC [ 通用权限管理系统 ]\r\n// +----------------------------------------------------------------------\r\n// | Nanjing Digital Technology Co., Ltd.\r\n// +----------------------------------------------------------------------\r\n// | Copyright (c) 2017 http://www.51-health.com All rights reserved.\r\n// +----------------------------------------------------------------------\r\n// | Author: Devlin <Devlinheart@qq.com>\r\n// +----------------------------------------------------------------------\r\n// | Create: 2017-06-20\r\n// +----------------------------------------------------------------------\r\n\r\n'use strict';\r\n/**\r\n * model\r\n */\r\nexport default class extends think.model.base {\r\n    /**\r\n     * 通过用户名称和密码查找登陆用户\r\n     * @param {*} username \r\n     * @param {*} password \r\n     */\r\n    async findUser(username,password){\r\n        return this.model(\"user\").where({username:username,password:password,delstatus:1}).find();\r\n    }\r\n\r\n      /**\r\n     * 加载字典组表格\r\n     * @param {*} gid \r\n     * @param {*} offset \r\n     * @param {*} limit \r\n     * @param {*} order \r\n     * @param {*} param \r\n     */\r\n    async loadUserTable(gid,offset,limit,order,param){\r\n        let str_obj = {delstatus:1};\r\n        if(!think.isEmpty(gid)&&gid!=0){\r\n            str_obj.gid = gid;\r\n        }\r\n        if(!think.isEmpty(param)){\r\n            str_obj.name = param;\r\n        }\r\n        let data = await this.model(\"user\").where(str_obj).order( order+\" desc\").limit(offset,limit).select();\r\n        let count = await this.model(\"user\").where(str_obj).count();\r\n        return {total:count,rows:data};\r\n    }\r\n}"
+    ]
+}

@@ -1,0 +1,52 @@
+{% include "../base/head.html" %}
+<link href="/static/common/css/pages/lock.css" rel="stylesheet" type="text/css"/>
+<body>
+<!-- BEGIN LOGO -->
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+    <div class="page-lock">
+        <div class="page-logo" style="text-align: center;">
+            <a class="brand" href="index.html">
+                <img src="/static/common/img/thinkjs-rabc-logo.png" alt="logo" />
+            </a>
+        </div>
+        <div class="page-body">
+            <img class="page-lock-img" src="/static/common/img/profile/profile.jpg" alt="">
+            <div class="page-lock-info">
+                <h1>{{userinfo.username}}</h1>
+                <input type="hidden" name="username" value="{{userinfo.username}}}"/>
+                <span>{{userinfo.email}}</span>
+                <span><em>已锁定</em></span>
+                <form class="form-search">
+                    <div class="input-append">
+                        <input type="password" class="m-wrap" placeholder="Password" name="password" style="height: 16px;">
+                        <button id="unlock" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+                    </div>
+                    <div class="relogin">
+                        <a href="/admin/user/login">不是 {{userinfo.username}} ?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-footer" style="color: #fff;text-align: center!important;">
+            2017 © ThinkJS - 南京数遥信息科技有限公司
+        </div>
+    </div>
+<style>
+    .copyright{
+        display: none!important;
+    }
+</style>
+{% include "../base/footer.html" %}
+<script src="/static/admin/js/login.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        Login.init();
+    });
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
+
