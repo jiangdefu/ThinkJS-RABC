@@ -127,8 +127,73 @@ export default class extends Base {
      * 新增用户
      */
     async addAction(){
-
         return this.display();
+    }
+    /**
+     * 编辑用户
+     */
+    async editAction(){
+        if (!think.isEmpty(this.param("id"))){
+            let user = await this.model("user").findUserById(this.param("id"));
+            if(!think.isEmpty(user)){
+                this.assign("user",user);
+                return this.display();
+            }
+        }
+        else{
+            return this.fail(think.config("message.empty_param"));
+        }
+    }
+    /**
+     * 添加用户
+     */
+    async adduserAction(){
+        if(!think.isEmpty(this.param())){
+            let rsp = {
+                status:-1,
+                msg:think.config("message.empty_param")
+            }
+            let param = {
+                code:this.param("code"),
+                username:this.param("name"),
+                phone:this.param("phone"),
+                email:this.param("email"),
+                sex:this.param("sex"),
+                gid:this.param("gid"),
+                status:this.param("status"),
+                create_time:times(new Date(),true),
+                password:think.md5("123456").toUpperCase(),
+                delstatus:1,
+            }
+            let result = await this.model("user").addUser(param);
+            if(!think.isEmpty(result)){
+                if(result.status==1){
+                    rsp.status = result.status;
+                    rsp.msg = think.config("message.success_msg");
+                }
+                else if(result.status==2){
+                    rsp.status = 0;
+                    rsp.msg = think.config("message.data_exist_msg");
+                }
+                else{
+                    rsp.status = 0;
+                    rsp.msg = think.config("message.fail_msg");
+                }
+            }
+            return this.json(rsp);
+        }
+        else{
+            return this.json( {
+                status:-1,
+                msg:think.config("message.empty_param")
+            })
+        }
+    }
+    /**
+     * 编辑用户保存
+     */
+    async edituserAction(){
+
     }
 
 }

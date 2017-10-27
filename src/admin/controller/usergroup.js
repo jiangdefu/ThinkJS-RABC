@@ -43,7 +43,7 @@ export default class extends Base {
         return this.display();
     }
     async addusergroupAction(){
-         let rsp = {
+        let rsp = {
             status:-1,
             msg:think.config("message.empty_param")
         }

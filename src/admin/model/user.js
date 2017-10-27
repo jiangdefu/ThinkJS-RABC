@@ -44,4 +44,32 @@ export default class extends think.model.base {
         let count = await this.model("user").where(str_obj).count();
         return {total:count,rows:data};
     }
+    /**
+     * 添加用户
+     * @param {*} user 
+     */
+    async addUser(user){
+        let bret = {
+            status:0
+        }
+        if(!think.isEmpty(user)){
+            let result = await this.model("user").thenAdd(user,{code:user.code,delstatus:1});
+            if(!think.isEmpty(result)){
+                if(result.type=='exist'){
+                    bret.status = 2;
+                }
+                else{
+                    bret.status = 1;
+                }
+            } 
+        }
+        return bret;
+    }
+    /**
+     * 通过主键查找用户
+     * @param {*} id 
+     */
+    async findUserById(id){
+        return await this.model("user").where({id:id}).find();
+    }
 }

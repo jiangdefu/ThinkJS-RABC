@@ -386,6 +386,155 @@ var _class = function (_Base) {
 
         return addAction;
     }();
+    /**
+     * 编辑用户
+     */
+
+
+    _class.prototype.editAction = function () {
+        var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7() {
+            var user;
+            return _regenerator2.default.wrap(function _callee7$(_context7) {
+                while (1) {
+                    switch (_context7.prev = _context7.next) {
+                        case 0:
+                            if (think.isEmpty(this.param("id"))) {
+                                _context7.next = 9;
+                                break;
+                            }
+
+                            _context7.next = 3;
+                            return this.model("user").findUserById(this.param("id"));
+
+                        case 3:
+                            user = _context7.sent;
+
+                            if (think.isEmpty(user)) {
+                                _context7.next = 7;
+                                break;
+                            }
+
+                            this.assign("user", user);
+                            return _context7.abrupt('return', this.display());
+
+                        case 7:
+                            _context7.next = 10;
+                            break;
+
+                        case 9:
+                            return _context7.abrupt('return', this.fail(think.config("message.empty_param")));
+
+                        case 10:
+                        case 'end':
+                            return _context7.stop();
+                    }
+                }
+            }, _callee7, this);
+        }));
+
+        function editAction() {
+            return _ref7.apply(this, arguments);
+        }
+
+        return editAction;
+    }();
+    /**
+     * 添加用户
+     */
+
+
+    _class.prototype.adduserAction = function () {
+        var _ref8 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee8() {
+            var rsp, param, result;
+            return _regenerator2.default.wrap(function _callee8$(_context8) {
+                while (1) {
+                    switch (_context8.prev = _context8.next) {
+                        case 0:
+                            if (think.isEmpty(this.param())) {
+                                _context8.next = 10;
+                                break;
+                            }
+
+                            rsp = {
+                                status: -1,
+                                msg: think.config("message.empty_param")
+                            };
+                            param = {
+                                code: this.param("code"),
+                                username: this.param("name"),
+                                phone: this.param("phone"),
+                                email: this.param("email"),
+                                sex: this.param("sex"),
+                                gid: this.param("gid"),
+                                status: this.param("status"),
+                                create_time: times(new Date(), true),
+                                password: think.md5("123456").toUpperCase(),
+                                delstatus: 1
+                            };
+                            _context8.next = 5;
+                            return this.model("user").addUser(param);
+
+                        case 5:
+                            result = _context8.sent;
+
+                            if (!think.isEmpty(result)) {
+                                if (result.status == 1) {
+                                    rsp.status = result.status;
+                                    rsp.msg = think.config("message.success_msg");
+                                } else if (result.status == 2) {
+                                    rsp.status = 0;
+                                    rsp.msg = think.config("message.data_exist_msg");
+                                } else {
+                                    rsp.status = 0;
+                                    rsp.msg = think.config("message.fail_msg");
+                                }
+                            }
+                            return _context8.abrupt('return', this.json(rsp));
+
+                        case 10:
+                            return _context8.abrupt('return', this.json({
+                                status: -1,
+                                msg: think.config("message.empty_param")
+                            }));
+
+                        case 11:
+                        case 'end':
+                            return _context8.stop();
+                    }
+                }
+            }, _callee8, this);
+        }));
+
+        function adduserAction() {
+            return _ref8.apply(this, arguments);
+        }
+
+        return adduserAction;
+    }();
+    /**
+     * 编辑用户保存
+     */
+
+
+    _class.prototype.edituserAction = function () {
+        var _ref9 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee9() {
+            return _regenerator2.default.wrap(function _callee9$(_context9) {
+                while (1) {
+                    switch (_context9.prev = _context9.next) {
+                        case 0:
+                        case 'end':
+                            return _context9.stop();
+                    }
+                }
+            }, _callee9, this);
+        }));
+
+        function edituserAction() {
+            return _ref9.apply(this, arguments);
+        }
+
+        return edituserAction;
+    }();
 
     return _class;
 }(_base2.default);

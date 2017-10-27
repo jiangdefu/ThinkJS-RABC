@@ -126,6 +126,91 @@ var _class = function (_think$model$base) {
 
         return loadUserTable;
     }();
+    /**
+     * 添加用户
+     * @param {*} user 
+     */
+
+
+    _class.prototype.addUser = function () {
+        var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(user) {
+            var bret, result;
+            return _regenerator2.default.wrap(function _callee3$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            bret = {
+                                status: 0
+                            };
+
+                            if (think.isEmpty(user)) {
+                                _context3.next = 6;
+                                break;
+                            }
+
+                            _context3.next = 4;
+                            return this.model("user").thenAdd(user, { code: user.code, delstatus: 1 });
+
+                        case 4:
+                            result = _context3.sent;
+
+                            if (!think.isEmpty(result)) {
+                                if (result.type == 'exist') {
+                                    bret.status = 2;
+                                } else {
+                                    bret.status = 1;
+                                }
+                            }
+
+                        case 6:
+                            return _context3.abrupt("return", bret);
+
+                        case 7:
+                        case "end":
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, this);
+        }));
+
+        function addUser(_x8) {
+            return _ref3.apply(this, arguments);
+        }
+
+        return addUser;
+    }();
+    /**
+     * 通过主键查找用户
+     * @param {*} id 
+     */
+
+
+    _class.prototype.findUserById = function () {
+        var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(id) {
+            return _regenerator2.default.wrap(function _callee4$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            _context4.next = 2;
+                            return this.model("user").where({ id: id }).find();
+
+                        case 2:
+                            return _context4.abrupt("return", _context4.sent);
+
+                        case 3:
+                        case "end":
+                            return _context4.stop();
+                    }
+                }
+            }, _callee4, this);
+        }));
+
+        function findUserById(_x9) {
+            return _ref4.apply(this, arguments);
+        }
+
+        return findUserById;
+    }();
 
     return _class;
 }(think.model.base);

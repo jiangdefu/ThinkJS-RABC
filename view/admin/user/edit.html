@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" type='button' data-dismiss='modal' aria-hidden='true'></button>
-            <h4 class="modal-title" id="ajaxModal">新增用户 </h4>
+            <h4 class="modal-title" id="ajaxModal">编辑用户 </h4>
         </div>
         <div class="modal-body">
             <div class="panel panel-default">
@@ -12,43 +12,54 @@
                 </div>
                 <div class="panel-body">
                     <form id="add_user_group_form" action="" class="form-horizontal">
+                        <input type="hidden" name="id" value="{{user.id}}" class="m-wrap" />
                         <div class="control-group">
                             <label class="control-label">编码</label>
                             <div class="controls">
-                                <input type="text" name="code" class="m-wrap" />
+                                <input type="text" name="code" value="{{user.code}}" class="m-wrap" />
                                 <span class="help-inline"> <i class="icon-exclamation-sign text-info"></i> 编码必须唯一</span>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">名称</label>
                             <div class="controls">
-                                <input type="text" name="name" class="m-wrap" />
+                                <input type="text" value="{{user.username}}" name="name" class="m-wrap" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">电话</label>
                             <div class="controls">
-                                <input type="text" name="phone" class="m-wrap" />
+                                <input type="text" value="{{user.phone}}" name="phone" class="m-wrap" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">email</label>
                             <div class="controls">
-                                <input type="text" name="email" class="m-wrap" />
+                                <input type="text" value="{{user.email}}"  name="email" class="m-wrap" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">性别</label>
                             <div class="controls">
+                                {% if user.sex==2 %}
                                 <label class="radio"><input type="radio" name="sex" value="2" checked/>女</label>
                                 <label class="radio"><input type="radio" name="sex" value="1"  />男</label> 
+                                {% else %}
+                                <label class="radio"><input type="radio" name="sex" value="2" />女</label>
+                                <label class="radio"><input type="radio" name="sex" value="1" checked />男</label> 
+                                {% endif %}
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">启用</label>
                             <div class="controls">
+                                {% if user.status==1 %}
                                 <label class="radio"><input type="radio" name="status" value="1" checked/>是</label>
                                 <label class="radio"><input type="radio" name="status" value="0"  />否</label> 
+                                {% else %}
+                                <label class="radio"><input type="radio" name="status" value="1"/>是</label>
+                                <label class="radio"><input type="radio" name="status" value="0"  checked/>否</label>
+                                {% endif %}
                             </div>
                         </div>
                     </form>
@@ -93,7 +104,7 @@
         $.ajax({
             type: "post",
             dataType: "json",
-            url: "/admin/user/adduser",
+            url: "/admin/user/edituser",
             data: data,
             success: function (res) {
                 if(res.status==1){
