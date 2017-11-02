@@ -193,7 +193,31 @@ export default class extends Base {
      * 编辑用户保存
      */
     async edituserAction(){
-        
+        if(!think.isEmpty(this.param("id"))){
+            let user = {
+                id:this.param("id"),
+                username:this.param("name"),
+                code:this.param("code"),
+                phone:this.param("phone"),
+                email:this.param("email"),
+                sex:this.param("sex"),
+                status:this.param("status"),
+                gid:this.param("gid")
+            }
+            let bRet = await this.model("user").updateUserById(user);
+            if(bRet.exist==1){
+                return this.fail(think.config("message.code_exist_msg"));
+            }
+            else if(bRet.exist==-1){
+                return this.fail(think.config("message.fail_msg"));
+            }
+            else{
+                return this.json({status:1,msg:think.config("message.success_msg")});
+            }
+        }
+        else{
+            return this.fail(think.config("message.empty_param"));
+        }
     }
 
 }

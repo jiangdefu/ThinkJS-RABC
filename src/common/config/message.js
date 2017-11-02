@@ -8,5 +8,6 @@ export default {
     fail_msg                :"操作失败",
     del_success_msg         :"删除成功",
     del_fail_msg            :"删除失败",
-    data_exist_msg          :"添加数据重复"
+    data_exist_msg          :"添加数据重复",
+    code_exist_msg          :"编码重复"
 };

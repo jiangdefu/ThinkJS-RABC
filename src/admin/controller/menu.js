@@ -125,6 +125,10 @@ export default class extends Base {
     async editAction(){
         if(!think.isEmpty(this.param("id"))){
             let menu = await this.model("menu").findMenuById(this.param("id"));
+            if(menu.pid!=0){
+                let pmenu = await this.model("menu").findMenuById(menu.pid);
+                menu.pidName = pmenu.name;
+            }
             this.assign("menu",menu);
         }
         let icon = await this.model("dict").getDictByGroupCode("sys_dict_group_icon");
@@ -132,6 +136,12 @@ export default class extends Base {
             this.assign("icon",icon);
         }
         return this.display();
+    }
+    /**
+     * 编辑
+     */
+    async editmenuAction(){
+        console.log(this.param());
     }
     /**
      * 删除
@@ -174,5 +184,12 @@ export default class extends Base {
             }
         }
         return this.json(response_data);    
+    }
+    /**
+     * 菜单树
+     */
+    async loadtreeAction(){
+        let data = await this.model("menu").loadtree();
+        return this.json(data);
     }
 }

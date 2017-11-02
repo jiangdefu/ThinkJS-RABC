@@ -90,5 +90,11 @@ export default class extends think.model.base {
     async sortMenu(data){
         return this.model("menu").updateMany(data);  
     }
+    /**
+     * 加载树结构菜单
+     */
+    async loadtree(){
+        return await this.model("menu").field("id,pid,name").where({status:1,delstatus:1,ismenu:0}).select();
+    }   
 
 }

@@ -72,4 +72,24 @@ export default class extends think.model.base {
     async findUserById(id){
         return await this.model("user").where({id:id}).find();
     }
+    /**
+     * 更新用户
+     * @param {*} user 用户信息
+     */
+    async updateUserById(user){
+        let obj = {
+            exist:-1
+        }
+        let update_user = await this.model("user").where({id:["<>",user.id],code:user.code}).count();
+        if(update_user>0){
+            obj.exist = 1;      //编码数据已经存在，不能重复
+        }
+        else{
+            let bRet = await this.model("user").where({id:user.id}).update(user);
+            if(!think.isEmpty(bRet)){
+                obj.exist = 0; 
+            }
+        }
+        return obj;
+    }
 }
