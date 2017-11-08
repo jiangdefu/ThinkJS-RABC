@@ -72,8 +72,18 @@ export default {
                         return Number(d).toFixed(fmt);
                     }
                 })
-
-                
+                /**
+                 * 获取字典值
+                 */
+                env.addFilter("get_dict_code",async(code,callback)=>{
+                    let value = await get_dict_value(code);
+                    if(!think.isEmpty(value)){
+                        callback(null, value.value);
+                    }
+                    else{
+                        callback(null, "");
+                    }
+                },true)
             }
         }
     }

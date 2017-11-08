@@ -103,4 +103,12 @@ export default class extends think.model.base {
         let sql = "select * from "+this.tablePrefix+"setup where gid=( select id from "+this.tablePrefix+"setup_group where code='"+groupCode+"') and status = 1 and delStatus=1";
         return await this.model("setup").query(sql);
     }
+
+    /**
+     * 通过code查找字典值
+     * @param {*} code 
+     */
+    async findByCode(code){
+        return await this.model("setup").where({status:1,delstatus:1,code:code}).find();
+    }
 }

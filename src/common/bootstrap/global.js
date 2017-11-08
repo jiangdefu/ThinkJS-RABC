@@ -235,3 +235,9 @@ global.sha1 = function (str) {
     str = md5sum.digest('hex');
     return str;
 };
+/**
+ * 通过code查找字典值
+ */
+global.get_dict_value = async(code)=>{
+    return await think.model("dict",think.config('db'),'admin').findByCode(code);
+}
