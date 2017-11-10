@@ -141,7 +141,50 @@ export default class extends Base {
      * 编辑
      */
     async editmenuAction(){
-        console.log(this.param());
+        let response_data ={
+            status:1,
+            msg:think.config("message.success_msg")
+        }
+        if(!think.isEmpty(this.param("id"))){
+            let menu = {
+                id:this.param("id"),
+            }
+            if(!think.isEmpty(this.param("pid"))){
+                menu.pid = this.param("pid");
+            }
+            if(!think.isEmpty(this.param("menu_name"))){
+                menu.name = this.param("menu_name");
+            }
+            if(!think.isEmpty(this.param("code"))){
+                menu.code = this.param("code");
+            }
+            if(!think.isEmpty(this.param("url"))){
+                menu.url = this.param("url");
+            }
+            if(!think.isEmpty(this.param("icon"))){
+                menu.icon = this.param("icon");
+            }
+            if(!think.isEmpty(this.param("sort"))){
+                menu.sort = this.param("sort");
+            }
+            if(!think.isEmpty(this.param("ismenu"))){
+                menu.ismenu = this.param("ismenu");
+            }
+            let bRet = await this.model("menu").updateMenuById(menu);
+            if(bRet.result==-1){
+                response_data.status = 0;
+                response_data.msg = think.config("message.code_exist_msg")
+            }
+            else if(bRet.result==0){
+                response_data.status = 0;
+                response_data.msg = think.config("message.fail_msg")
+            }
+        }
+        else{
+            response_data.status = 0;
+            response_data.msg = think.config("message.empty_param")
+        }
+        return this.json(response_data);
     }
     /**
      * 删除
@@ -190,6 +233,30 @@ export default class extends Base {
      */
     async loadtreeAction(){
         let data = await this.model("menu").loadtree();
+        return this.json(data);
+    }
+    /**
+     * 加载操作权限菜单树（包含操作权限）
+     */
+    async loadrabctreeAction(){
+        let data = [];
+        if(think.isEmpty(this.param("type"))&&think.isEmpty(this.parm("id"))){
+            data = await this.model("menu").loadrabctree();
+        }
+        else{
+            if(!think.isEmpty(this.param("type"))){
+                if(this.param("type")=="user"){     //加载用户权限关系
+                    if(!think.isEmpty(this.parm("id"))){
+                        
+                    }
+                }
+                else if(this.param("type")=="usergroup"){   //加载用户组权限关系
+                    if(!think.isEmpty(this.parm("id"))){
+                        
+                    }
+                }
+            }
+        }
         return this.json(data);
     }
 }

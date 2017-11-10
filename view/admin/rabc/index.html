@@ -1,1 +1,176 @@
 {% extends "../base/main.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/metroStyle/metroStyle.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
+{% endblock %}
+{% block content %}
+<div class="row-fluid" style="height: 500px;">
+    <ul class="nav nav-tabs">
+        <li class="active" style="list-style: none"><a href="#tab_user_group" data-toggle="tab">用户组权限</a></li>
+        <li class="" style="list-style: none"><a href="#tab_user" data-toggle="tab">用户权限</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_user_group">
+            <div class="row" style="height: 500px;">
+                <div class="col-sm-7" style="height: 500px;">
+                    <div class="portlet box" style="height: 100%;">
+                        <div class="portlet-title" style="background-color:rgb(69, 1, 114)">
+                            <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>用户组列表</div>
+                            <div class="tools">
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div id="toolbar">
+                                
+                            </div>
+                            <style>
+                                .table th, .table td{
+                                    text-align: center;
+                                }
+                            </style>
+                            <table id="userTable"
+                                data-toggle='table' data-url='/admin/usergroup/loadusergroup' data-method='get'
+                                data-toolbar='#toolbar' data-show-refresh='true'
+                                data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                                data-query-params='queryParams' data-search="true" data-show-toggle="true">
+                                <thead>
+                                <tr>
+                                    <th data-radio="true" data-field="id"></th>
+                                    <th data-field='code'>编码</th>
+                                    <th data-field='name'>名称</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4" style="height: 500px;">
+                    <div class="portlet box" style="height: 100%;">
+                        <div class="portlet-title" style="background-color:rgb(69, 1, 114)">
+                            <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
+                            <div class="tools">
+                                <a href="javascript:;" title="分配"><i class="fa fa-cog" style="color:#fff"></i></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <ul id="rabc_tree_usergroup" class="ztree" style="border:none;margin-top: 0;"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_user">
+            <div class="row" style="height: 500px;">
+                <div class="col-sm-7" style="height: 500px;">
+                    <div class="portlet box" style="height: 100%;">
+                        <div class="portlet-title" style="background-color:green">
+                            <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>用户列表</div>
+                            <div class="tools"></div>
+                        </div>
+                        <div class="portlet-body">
+                            <div id="toolbar">
+                        
+                            </div>
+                            <style>
+                                .table th, .table td{
+                                    text-align: center;
+                                }
+                            </style>
+                            <table id="userTable"
+                                data-toggle='table' data-url='/admin/user/loaduser' data-method='get'
+                                data-toolbar='#toolbar' data-show-refresh='true'
+                                data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                                data-query-params='queryParams' data-search="true" data-show-toggle="true">
+                                <thead>
+                                <tr>
+                                    <th data-radio="true" data-field="id"></th>
+                                    <th data-field='code'>编码</th>
+                                    <th data-field='username'>名称</th>
+                                    <th data-field='email'>邮箱</th>
+                                    <th data-field='phone'>电话</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-sm-4" style="height: 500px;">
+                    <div class="portlet box" style="height: 100%;">
+                        <div class="portlet-title" style="background-color:green">
+                            <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
+                            <div class="tools">
+                                <a href="javascript:;" title="分配"><i class="fa fa-cog" style="color:#fff"></i></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <ul id="rabc_tree_user" class="ztree" style="border:none;margin-top: 0;"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTAINER-->
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table.js"></script>
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/static/common/plugins/zTree/js/jquery.ztree.all.min.js"></script>
+<script>
+    // 表格过滤条件
+    function queryParams(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "gid":$("input[name='gid']").val(),
+            "param":params.search
+        };
+        return temp;
+    };
+    var setting = {
+        check: {
+            enable: true,
+            autoCheckTrigger: true
+        },
+        view: {
+            showIcon: true
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey:"id",
+                pIdKey:"pid",
+                rootPid:-1
+            }
+        },
+        async:{
+            url:"/admin/menu/loadrabctree",
+            enable:true,
+            type:"post"
+        },
+        callback:{
+            onClick:function(event,treeId,treeNode){
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                if(treeNode.isParent){
+                    if(treeNode.open){
+                        treeObj.expandNode(treeNode, false, true, true);
+                    }else{
+                        treeObj.expandNode(treeNode, true, true, true);
+                    }
+                }
+              return;
+            }
+        }
+    };
+    $(document).ready(function(){
+        $.fn.zTree.init($("#rabc_tree_usergroup"), setting,null);
+        $.fn.zTree.init($("#rabc_tree_user"), setting,null);
+    });
+
+
+</script>
+{% endblock %}

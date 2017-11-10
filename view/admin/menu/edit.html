@@ -2,7 +2,7 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <button class="close" type='button' data-dismiss='modal' aria-hidden='true'></button>
+            <button class="close" id="add_close" type='button' data-dismiss='modal' aria-hidden='true'></button>
             <h4 class="modal-title" id="ajaxModal"> 菜单编辑 </h4>
         </div>
         <div class="modal-body">
@@ -18,6 +18,7 @@
                                 <div class="input-append">
                                     <input type="text" name="pidName" class="m-wrap" value="{{menu.pidName}}" readonly/>
                                     <input type="hidden" name="pid" class="m-wrap" value="{{menu.pid}}" readonly/>
+                                    <input type="hidden" name="id" class="m-wrap" value="{{menu.id}}" readonly/>
                                     <span class="add-on" style="cursor: pointer" id="showMenuTree">选择</span>
                                 </div>
                                 <ul style="display:none" id="treeDemo" class="ztree"></ul>
@@ -134,7 +135,12 @@
 
     function compile_save(){
         let data = $("#editMenu").serializeObject();
-        data.ismenu = $("input[name='ismenu']").val();
+        if($("input[name='ismenu']").prop("checked")){
+            data.ismenu = 0;
+        }
+        else{
+            data.ismenu = 1;
+        }
         $.ajax({
             type: "post",
             dataType: "json",

@@ -96,5 +96,31 @@ export default class extends think.model.base {
     async loadtree(){
         return await this.model("menu").field("id,pid,name").where({status:1,delstatus:1,ismenu:0}).select();
     }   
-
+    /**
+     * 加载操作权限菜单树
+     */
+    async loadrabctree(){
+        return await this.model("menu").field("id,pid,name").where({status:1,delstatus:1}).order("sort asc").select();
+    }
+    /**
+     * 编辑菜单
+     * @param {*} data 菜单数据
+     */
+    async updateMenuById(data){
+        let obj={};
+        let menu = await this.model("menu").where({delstatus:1,id:["<>",data.id],code:data.code}).find();
+        if(think.isEmpty(menu)){
+            let bRet = await this.model("menu").where({id:data.id}).update(data);
+            if(!think.isEmpty(bRet)){
+                obj.result = 1;
+            }
+            else{
+                obj.result = 0;
+            }
+        }
+        else{
+            obj.result = -1;
+        }
+        return obj;
+    }
 }
