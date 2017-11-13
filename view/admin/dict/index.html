@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
 {% endblock %}
 {% block content %}
-<div class="row" style="height: 500px;">
-    <div class="col-sm-3" style="height: 500px;">
+<div class="row" style="min-height: 500px;;">
+    <div class="col-sm-3" style="min-height: 500px;;">
         <div class="portlet box" style="height: 100%;">
             <div class="portlet-title" style="background-color: #852b99">
                 <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>字典组</div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8" style="height: 500px;">
+    <div class="col-sm-8" style="min-height: 500px;;">
         <div class="portlet box" style="height: 100%;">
             <div class="portlet-title" style="background-color: #852b99">
                 <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>字典配置</div>
@@ -41,7 +41,7 @@
                     <tr>
                         <th data-field='code'>字典编码</th>
                         <th data-field='name'>字典名称</th>
-                        <th data-field='value'>字典值</th>
+                        <th data-field='value' data-width="100">字典值</th>
                         <th data-field='status' data-formatter="statusFormat">是否启用</th>
                         <th data-formatter="operation">操作</th>
                     </tr>
