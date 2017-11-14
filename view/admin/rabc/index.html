@@ -56,7 +56,7 @@
                         <div class="portlet-title" style="background-color:rgb(69, 1, 114)">
                             <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
                             <div class="tools">
-                                <a href="javascript:;" title="分配" click="clickAlloc(0)"><i class="fa fa-cog" style="color:#fff"></i></a>
+                                <a href="javascript:;" title="分配" onclick="clickAlloc(1)"><i class="fa fa-cog" style="color:#fff"></i></a>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -107,7 +107,7 @@
                         <div class="portlet-title" style="background-color:green">
                             <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
                             <div class="tools">
-                                <a href="javascript:;" title="分配" click="clickAlloc(0)"><i class="fa fa-cog" style="color:#fff"></i></a>
+                                <a href="javascript:;" title="分配" onclick="clickAlloc(0)"><i class="fa fa-cog" style="color:#fff"></i></a>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -176,24 +176,27 @@
     let currentUserRow = null;
     $('#userGroupTable').on('check.bs.table', function (e,row) {
         currentUserGroupRow = row;
+        setting.async.url = "/admin/menu/loadrabctree?id="+currentUserGroupRow.id+"&type=usergroup";
+        $.fn.zTree.init($("#rabc_tree_usergroup"), setting,null);
     });
     $('#userTable').on('check.bs.table', function (e,row) {
         currentUserRow = row;
+        setting.async.url = "/admin/menu/loadrabctree?id="+currentUserRow.id+"&type=user";
+        $.fn.zTree.init($("#rabc_tree_user"), setting,null);
     });
 
     function clickAlloc(gstatus){
-        var treeObj = null;
-        if(gstatus==0){
+        if(gstatus==1){
             if(currentUserGroupRow){
-                treeObj = $.fn.zTree.getZTreeObj("#rabc_tree_usergroup");
-                var nodes = treeObj.getSelectedNodes();
+                let treeObj = $.fn.zTree.getZTreeObj("rabc_tree_usergroup");
+                let nodes = treeObj.getCheckedNodes(true);
                 let mid = [];
                 if(nodes&&nodes.length>0){
                     nodes.forEach(element => {
                         mid.push(element.id);
                     });
                 }
-                alloc(gstatus,currentUserGroupRow.id,mid);
+                alloc(gstatus,currentUserGroupRow.id,mid.join(","));
             }
             else{
                 toastr.warning("未选择操作用户组，请选择操作用户组！");
@@ -201,23 +204,21 @@
         }
         else{
             if(currentUserRow){
-                treeObj = $.fn.zTree.getZTreeObj("#rabc_tree_user");
+                let treeObj = $.fn.zTree.getZTreeObj("rabc_tree_user");
                 let mid = [];
-                var nodes = treeObj.getSelectedNodes();
+                let nodes = treeObj.getCheckedNodes(true);
                 if(nodes&&nodes.length>0){
                     nodes.forEach(element => {
                         mid.push(element.id);
                     });
                 }
-                alloc(gstatus,currentUserRow.id,mid);
+                alloc(gstatus,currentUserRow.id,mid,join(","));
             }
             else{
                 toastr.warning("未选择操作用户，请选择操作用户！");
             } 
-        }
-        
+        } 
     }
-
     function alloc(gstatus,rid,mid){
         $.ajax({
             type: "post",

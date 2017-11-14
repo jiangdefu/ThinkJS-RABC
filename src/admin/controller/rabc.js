@@ -31,7 +31,7 @@ export default class extends Base {
             status:0,
             msg:think.config("message.empty_param")
         }
-        if(!think.isEmpty(this.param("rid"))&&!think.isEmpty(this.param("mid"))&&!think.isEmpty(this.param("gstatus"))){
+        if(!think.isEmpty(this.param("rid"))&&!think.isEmpty(this.param("gstatus"))){
             let result = await this.model("rabc").allocRabc(this.param("rid"),this.param("mid"),this.param("gstatus"));
             if(!think.isEmpty(result)){
                 response_data.status=1,

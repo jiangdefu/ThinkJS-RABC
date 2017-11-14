@@ -24,7 +24,7 @@ export default class extends think.model.base {
         let rabc = await this.model("rabc").where({rid:rid,gstatus:gstatus}).find();
         let menu = [];
         if(!think.isEmpty(rabc)&&!think.isEmpty(rabc.mid)){
-            let u_rabc = rabc.mid.spilt(",");
+            let u_rabc = rabc.mid.split(",");
             menu = await this.model("menu").findMenuByIdArr(u_rabc);
         }
         return menu;
@@ -39,13 +39,13 @@ export default class extends think.model.base {
         if(!think.isEmpty(userGroup)){
             let group_rabc = await this.model("rabc").where({rid:userGroup.id,gstatus:1}).find();
             if(!think.isEmpty(group_rabc)&&!think.isEmpty(group_rabc.mid)){
-                group_rabc_arr = group_rabc.mid.spilt(",");
+                group_rabc_arr = group_rabc.mid.split(",");
             }
         }
         let user_rabc = await this.model("rabc").where({rid:uid,gstatus:1}).find();
         let user_rabc_arr = [];
         if(!think.isEmpty(user_rabc)&&!think.isEmpty(user_rabc.mid)){
-            user_rabc_arr = user_rabc.mid.spilt(",");
+            user_rabc_arr = user_rabc.mid.split(",");
         }
         let all_rabc = group_rabc_arr.concat(user_rabc_arr);
         removeEmptyArrayEle(all_rabc);  //数组去空
@@ -74,5 +74,6 @@ export default class extends think.model.base {
             })
         }
     }
-
+    
+    
 }
