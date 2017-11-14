@@ -13,7 +13,7 @@ database: 'rabc',                   //数据库名称
 user: 'root',                       //用户名
 password: 'NJDIG@2017shuyao.com',   //密码
 prefix: 'rabc_',                    //表前缀
-encoding: 'utf8'`                   //编码 ` 
+encoding: 'utf8'`                   //编码 ` <br />
 配置好数据库连接信息之后，在项目目录下打开命令行输入命令 node www/development.js<br />
 打开浏览器在地址栏输入 http:/127.0.0.1:8360 即可看到登陆页面 默认登陆用户是 admin，密码是 123456<br />
 ## 系统登陆页面
