@@ -1,0 +1,2 @@
+INSERT INTO rabc.rabc_setup_group (pid, code, name, briefname, status, create_time, delstatus) VALUES (0, 'sys_dict_group_icon', '系统图标', '图标', 1, '2017-07-06 15:48:06', 1);
+INSERT INTO rabc.rabc_setup_group (pid, code, name, briefname, status, create_time, delstatus) VALUES (0, 'sys_copyright', '版权信息', '版权信息', 1, '2017-07-10 16:42:11', 1);

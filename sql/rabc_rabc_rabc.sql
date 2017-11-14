@@ -1,0 +1,1 @@
+INSERT INTO rabc.rabc_rabc (rid, mid, gstatus, create_time) VALUES (1, '3,32,26,27,30,31,28,4,5,1,2,24,25,29', 1, '2017-11-14 16:45:29');

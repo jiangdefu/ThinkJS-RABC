@@ -1,0 +1,2 @@
+INSERT INTO rabc.rabc_group (pid, code, name, briefname, status, create_time, delstatus) VALUES (0, 'sys_user_group_supper', '超级管理员', '超级管理员', 1, '2017-07-14 18:10:31', 1);
+INSERT INTO rabc.rabc_group (pid, code, name, briefname, status, create_time, delstatus) VALUES (0, 'sys_user_basic_staff', '初级员工', '初级员工', 1, '2017-10-13 17:17:34', 1);

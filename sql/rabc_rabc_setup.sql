@@ -1,0 +1,13 @@
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_fa_home', '主页', 'fa fa-home', 0, 1, '2017-07-06 15:48:59', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sadsda', 'asd', '', 0, 0, '2017-07-11 09:21:19', 0);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, '111', '111', '111', 0, 1, '2017-07-11 10:58:43', 0);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_bar_chart', '图表', 'fa fa-bar-chart', 0, 1, '2017-07-11 16:08:01', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_fa_group', '用户组', ' fa fa-group', 0, 1, '2017-07-14 16:33:46', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_fa_user', '用户', 'fa fa-user', 0, 1, '2017-07-14 16:49:07', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_fa_th', '表格', 'fa fa-th', 0, 1, '2017-07-14 16:50:02', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (3, 'sys_copyright_company', '研发公司', '南京数遥信息科技有限公司', 0, 1, '2017-07-17 16:20:36', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (1, 'sys_dict_icon_fa_cog', '齿轮', 'fa fa-cog', 0, 1, '2017-07-17 17:18:28', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (3, 'sys_sys_name', '系统名称', 'Think-RABC', 0, 1, '2017-11-13 10:03:33', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (3, 'sys_sys_title', '标题', '基于ThinkJS的权限管理系统', 0, 1, '2017-11-13 10:04:24', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (3, 'sys_sys_logo', '  系统Logo', '/static/common/img/thinkjs-rabc-head-2.png', 0, 1, '2017-11-13 10:05:38', 1);
+INSERT INTO rabc.rabc_setup (gid, code, name, value, sort, status, create_time, delstatus) VALUES (3, 'sys_sys_login_logo', '登录页面Logo', '/static/common/img/thinkjs-rabc-logo.png', 0, 1, '2017-11-13 10:06:48', 1);
