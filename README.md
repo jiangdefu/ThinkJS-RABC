@@ -8,3 +8,5 @@ ThinkJS-RABC 是一款基于[ThinkJS](https://thinkjs.org/)框架开发的简易
 ![user](https://raw.githubusercontent.com/jiangdefu/ThinkJS-RABC/master/www/static/admin/img/user.png)
 ## 字典管理
 ![dict](https://raw.githubusercontent.com/jiangdefu/ThinkJS-RABC/master/www/static/admin/img/dict.png)
+## 权限管理
+![dict](https://raw.githubusercontent.com/jiangdefu/ThinkJS-RABC/master/www/static/admin/img/rabc.png)

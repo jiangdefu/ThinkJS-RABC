@@ -105,3 +105,15 @@ CREATE TABLE `rabc_setup` (
   PRIMARY KEY (`id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `rabc_rabc`;
+-- auto-generated definition
+create table rabc_rabc
+(
+	id int auto_increment comment '主键，自增'
+		primary key,
+	rid int not null comment '关联的用户组或者用户',
+	mid varchar(128) not null comment '关联的菜单',
+	gstatus int(1) default '1' not null comment '是否用户组(0:用户 1:用户组)',
+	create_time timestamp default CURRENT_TIMESTAMP not null comment '创建时间'
+)
+;
