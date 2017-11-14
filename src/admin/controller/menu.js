@@ -239,21 +239,30 @@ export default class extends Base {
      * 加载操作权限菜单树（包含操作权限）
      */
     async loadrabctreeAction(){
-        let data = [];
-        if(think.isEmpty(this.param("type"))&&think.isEmpty(this.parm("id"))){
-            data = await this.model("menu").loadrabctree();
-        }
-        else{
-            if(!think.isEmpty(this.param("type"))){
-                if(this.param("type")=="user"){     //加载用户权限关系
-                    if(!think.isEmpty(this.parm("id"))){
-                        
-                    }
+        let data = await this.model("menu").loadrabctree();
+        if(!think.isEmpty(this.param("type"))){    
+            if(this.param("type")=="user"){     //加载用户权限关系
+                if(!think.isEmpty(this.param("id"))){
+                    let user_menu_data  = await this.model("rabc").getRabcByGid(this.param("id"),0)
+                    data.forEach(element => {
+                        user_menu_data.forEach(function(ele){
+                            if(element.id==ele.id){
+                                element.checked = true;
+                            }
+                        })
+                    });
                 }
-                else if(this.param("type")=="usergroup"){   //加载用户组权限关系
-                    if(!think.isEmpty(this.parm("id"))){
-                        
-                    }
+            }
+            else if(this.param("type")=="usergroup"){   //加载用户组权限关系
+                if(!think.isEmpty(this.param("id"))){
+                    let group_menu_data  = await this.model("rabc").getRabcByGid(this.param("id"),1);
+                    data.forEach(element => {
+                        group_menu_data.forEach(function(ele){
+                            if(element.id==ele.id){
+                                element.checked = true;
+                            }
+                        })
+                    });
                 }
             }
         }

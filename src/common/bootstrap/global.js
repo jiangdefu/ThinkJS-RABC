@@ -241,3 +241,33 @@ global.sha1 = function (str) {
 global.get_dict_value = async(code)=>{
     return await think.model("dict",think.config('db'),'admin').findByCode(code);
 }
+/**
+ * 数组去重复
+ * @param {*} arr 
+ */
+global.arr_unique = function(arr){
+    if(Object.prototype.toString.call(arr)=='[object Array]'){
+        let res = [arr[0]];
+        for(let i = 1; i < arr.length; i++){
+            if(arr[i] !== res[res.length - 1]){
+                res.push(arr[i]);
+            }
+        }
+        return res;
+    }
+    return "not array";
+}
+/**
+ * 数组去除空元素
+ * @param {*} arr 
+ */
+global.removeEmptyArrayEle = function (arr){  
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] == undefined) {
+            arr.splice(i,1);
+            i = i - 1; // i - 1 ,因为空元素在数组下标 2 位置，删除空之后，后面的元素要向前补位，
+                                // 这样才能真正去掉空元素,觉得这句可以删掉的连续为空试试，然后思考其中逻辑
+        }
+    }
+    return arr;
+}

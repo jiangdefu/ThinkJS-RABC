@@ -3,6 +3,12 @@
 <link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
 <link rel="stylesheet" href="/static/common/plugins/zTree/css/metroStyle/metroStyle.css" />
 <link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
+<style>
+    .selected td:not(:first-child){
+        background: #1F92D4 !important;
+        color: #FFF
+    }
+</style>
 {% endblock %}
 {% block content %}
 <div class="row-fluid" style="min-height: 500px;;">
@@ -29,14 +35,14 @@
                                     text-align: center;
                                 }
                             </style>
-                            <table id="userTable"
+                            <table id="userGroupTable"
                                 data-toggle='table' data-url='/admin/usergroup/loadusergroup' data-method='get'
                                 data-toolbar='#toolbar' data-show-refresh='true'
                                 data-pagination='true' data-side-pagination='server' data-click-to-select='true'
                                 data-query-params='queryParams' data-search="true" data-show-toggle="true">
                                 <thead>
                                 <tr>
-                                    <th data-radio="true" data-field="id"></th>
+                                    <th data-radio="true"  data-field="checked"></th>
                                     <th data-field='code'>编码</th>
                                     <th data-field='name'>名称</th>
                                 </tr>
@@ -50,7 +56,7 @@
                         <div class="portlet-title" style="background-color:rgb(69, 1, 114)">
                             <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
                             <div class="tools">
-                                <a href="javascript:;" title="分配"><i class="fa fa-cog" style="color:#fff"></i></a>
+                                <a href="javascript:;" title="分配" click="clickAlloc(0)"><i class="fa fa-cog" style="color:#fff"></i></a>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -84,7 +90,7 @@
                                 data-query-params='queryParams' data-search="true" data-show-toggle="true">
                                 <thead>
                                 <tr>
-                                    <th data-radio="true" data-field="id"></th>
+                                    <th data-radio="true" data-field="checked"></th>
                                     <th data-field='code'>编码</th>
                                     <th data-field='username'>名称</th>
                                     <th data-field='email'>邮箱</th>
@@ -101,7 +107,7 @@
                         <div class="portlet-title" style="background-color:green">
                             <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>权限信息</div>
                             <div class="tools">
-                                <a href="javascript:;" title="分配"><i class="fa fa-cog" style="color:#fff"></i></a>
+                                <a href="javascript:;" title="分配" click="clickAlloc(0)"><i class="fa fa-cog" style="color:#fff"></i></a>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -166,6 +172,71 @@
             }
         }
     };
+    let currentUserGroupRow = null;
+    let currentUserRow = null;
+    $('#userGroupTable').on('check.bs.table', function (e,row) {
+        currentUserGroupRow = row;
+    });
+    $('#userTable').on('check.bs.table', function (e,row) {
+        currentUserRow = row;
+    });
+
+    function clickAlloc(gstatus){
+        var treeObj = null;
+        if(gstatus==0){
+            if(currentUserGroupRow){
+                treeObj = $.fn.zTree.getZTreeObj("#rabc_tree_usergroup");
+                var nodes = treeObj.getSelectedNodes();
+                let mid = [];
+                if(nodes&&nodes.length>0){
+                    nodes.forEach(element => {
+                        mid.push(element.id);
+                    });
+                }
+                alloc(gstatus,currentUserGroupRow.id,mid);
+            }
+            else{
+                toastr.warning("未选择操作用户组，请选择操作用户组！");
+            }
+        }
+        else{
+            if(currentUserRow){
+                treeObj = $.fn.zTree.getZTreeObj("#rabc_tree_user");
+                let mid = [];
+                var nodes = treeObj.getSelectedNodes();
+                if(nodes&&nodes.length>0){
+                    nodes.forEach(element => {
+                        mid.push(element.id);
+                    });
+                }
+                alloc(gstatus,currentUserRow.id,mid);
+            }
+            else{
+                toastr.warning("未选择操作用户，请选择操作用户！");
+            } 
+        }
+        
+    }
+
+    function alloc(gstatus,rid,mid){
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/admin/rabc/alloc",
+            data: {
+                rid:rid,
+                mid:mid,
+                gstatus:gstatus
+            },
+            success: function (res) {
+                if(res.status==1){
+                    toastr.success(res.msg);
+                }else{
+                    toastr.warning(res.msg);
+                }
+            }
+        })
+    }
     $(document).ready(function(){
         $.fn.zTree.init($("#rabc_tree_usergroup"), setting,null);
         $.fn.zTree.init($("#rabc_tree_user"), setting,null);

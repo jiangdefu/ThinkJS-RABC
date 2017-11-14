@@ -123,4 +123,20 @@ export default class extends think.model.base {
         }
         return obj;
     }
+    /**
+     * 通过数组主键查找菜单
+     * @param {*} idArr 
+     */
+    async findMenuByIdArr(idArr){
+        let menu = [];
+        if(!think.isEmpty(idArr)){
+            if(idArr.length>1){
+                menu = await this.model("menu").where({id:["IN",idArr]}).select();
+            }
+            else{
+                menu = await this.model("menu").where({id:idArr[0]}).select();
+            }
+        }
+        return menu;
+    }
 }

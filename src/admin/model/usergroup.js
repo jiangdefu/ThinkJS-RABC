@@ -17,11 +17,18 @@
 export default class extends think.model.base {
     /**
      * 通过用户查找所在用户组
-     * @param {*} user  //当前登陆用户 
+     * @param {*} userId  //当前登陆用户 
      */
-    async getGroupByUser(user){
-        
+    async getGroupByUserId(userId){
+        let user = await this.model("user").findUserById(userId);
+        if(!think.isEmpty(user)){
+            return await this.model("group").where({id:user.gid}).find();
+        }
+        else{
+            return null;
+        }
     }
+        
      /**
      * 加载用户组Tree表格
      */
