@@ -3,11 +3,11 @@
 // +----------------------------------------------------------------------
 // | Nanjing Digital Technology Co., Ltd.
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.51-health.com All rights reserved.
+// | Copyright (c) 2021 http://www.51-health.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: Devlin <Devlinheart@qq.com>
+// | Author: devlincms <devlincms@163.com>
 // +----------------------------------------------------------------------
-// | Create: 2017-06-20
+// | Create: 2021-02-25
 // +----------------------------------------------------------------------
 
 'use strict';
@@ -91,5 +91,33 @@ export default class extends think.model.base {
             }
         }
         return obj;
+    }
+    /**
+     * 获取当前用户的权限
+     * 包含当前用户所在组权限和个人用户权限
+     * @param {*} user 
+     */
+    async getUserMenu(user){
+        //获取当前用户所在用户组
+        let userGroup = await this.model("group").where({id:user.gid}).find();
+
+        let userGroupMenu = {};
+        if(!think.isEmpty(userGroup)){
+            userGroupMenu= await this.model("rabc").where({rid:userGroup.id,gstatus:1}).find();
+           
+        }
+        let userMenu = await this.model("rabc").where({rid:user.id,gstatus:0}).find();
+        let menu = [];
+        if(!think.isEmpty(userGroupMenu)){
+            menu = userGroupMenu.mid.split(",");
+        }
+        if(!think.isEmpty(userMenu)){
+            menu.concat(userMenu.mid.split(","))
+        }
+        menu = uniqueArr(menu);
+        if(!think.isEmpty(menu)){
+            return this.model("menu").where({id:['IN',menu]}).select();
+        }
+        return null;
     }
 }

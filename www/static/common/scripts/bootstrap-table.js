@@ -356,6 +356,7 @@
         maintainSelected: false,
         searchTimeOut: 500,
         searchText: '',
+        seachplaceholder:'',
         iconSize: undefined,
         buttonsClass: 'default',
         iconsPrefix: 'glyphicon', // glyphicon of fa (font awesome)
@@ -368,7 +369,6 @@
             detailOpen: 'glyphicon-plus icon-plus',
             detailClose: 'glyphicon-minus icon-minus'
         },
-
         customSearch: $.noop,
 
         customSort: $.noop,
@@ -1167,7 +1167,7 @@
                 sprintf('<input class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="%s">',
-                    this.options.formatSearch()),
+                    this.options.seachplaceholder),
                 '</div>');
 
             this.$toolbar.append(html.join(''));
@@ -2970,7 +2970,6 @@
                 data = $this.data('bootstrap.table'),
                 options = $.extend({}, BootstrapTable.DEFAULTS, $this.data(),
                     typeof option === 'object' && option);
-
             if (typeof option === 'string') {
                 if ($.inArray(option, allowedMethods) < 0) {
                     throw new Error("Unknown method: " + option);

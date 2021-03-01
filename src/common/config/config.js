@@ -16,5 +16,6 @@ export default {
     superpassword:"E10ADC3949BA59ABBE56E057F20F883E",
     superlogin:true,//true：开启超级用户登陆 false：关闭超级用户登陆
     login_pass_add:['/admin/user/login'],
-    lock_add:"/admin/user/lock"
+    lock_add:"/admin/user/lock",
+    rabc_pass_url:['/admin/user/login','/admin/user/lock']
 };

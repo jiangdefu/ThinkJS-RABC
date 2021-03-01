@@ -97,6 +97,65 @@ $(document).on("click",'[data-toggle="status"]',function(e){
         }
     })
 })
+$(document).on("click",'[data-toggle="dstatus"]',function(e){
+    e.preventDefault();
+    var me = this;
+    var value = $(me).attr("data-value");
+    var data = {
+        id:$(me).attr("data-id"),
+        status:value == 1?0:1
+    };
+    $.ajax({
+        type:"post",
+        url:$(me).attr("href"),
+        data:data,
+        success:function(res){
+            if(res&&res.status == 1){
+                if(value == 0){
+                    $(me).html("有效("+1+")");
+                }else if(value == 1){
+                    $(me).html("无效("+0+")");
+                }
+                $(me).attr("data-value",value == 1?0:1);
+                toastr.success(res.msg);
+            }else{
+                toastr.warning(res.msg);
+            }
+        },
+        timeout:5000,
+        error:function(res){
+            toastr.warning(res);
+        }
+    })
+})
+$(document).on("click",'[data-toggle="env"]',function(e){
+    e.preventDefault();
+    var me = this;
+    var value = $(me).attr("data-value");
+    var data = {
+        env:value
+    };
+    $.ajax({
+        type:"post",
+        url:$(me).attr("href"),
+        data:data,
+        success:function(res){
+            if(res&&res.status == 1){
+                $("#environment").html("&nbsp;&nbsp;"+$(me).text());
+                toastr.success(res.msg);
+                setTimeout(function(){
+                    window.location.reload();
+                },2000)
+            }else{
+                toastr.warning(res.msg);
+            }
+        },
+        timeout:5000,
+        error:function(res){
+            toastr.warning(res);
+        }
+    })
+})
 function deleteByID(url,data) {
     swal({
         title: "是否确定删除?",

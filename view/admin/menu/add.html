@@ -36,11 +36,11 @@
                                     <div class="iconContent">
                                         <ul class="social-icons">
                                             {% for item in icon %}
-                                                <li class="icon-name" data-value="{{item.value}}">
-                                                    <a href="javascript:void(0)">
-                                                        <i class="{{item.value}}"></i>
-                                                    </a>
-                                                </li>
+                                            <li class="icon-name" data-value="{{item.value}}">
+                                                <a href="javascript:void(0)">
+                                                    <i class="{{item.value}}"></i>
+                                                </a>
+                                            </li>
                                             {% endfor %}
                                         </ul>
                                     </div>
@@ -62,15 +62,20 @@
                         <div class="control-group">
                             <label class="control-label">排序</label>
                             <div class="controls">
-                                <input type="text" name="sort" class="m-wrap" value="0"/>
+                                <input type="text" name="sort" class="m-wrap" value="0" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">是否菜单</label>
                             <div class="controls">
-                                <div class="switch" data-on="primary" data-off="info">
-                                    <input type="checkbox" checked class="toggle" name="ismenu"/>
-                                </div>
+                                <label class="radio">
+                                    <input type="radio" name="ismenu" value="1" checked />&nbsp;&nbsp;
+                                    菜单
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="ismenu" value="0"  />&nbsp;&nbsp;
+                                    功能点
+                                </label>
                             </div>
                         </div>
                     </form>
@@ -79,7 +84,7 @@
         </div>
         <div class="modal-footer">
             <button id="add_close" type="button" data-dismiss='modal' style="display: none;"></button>
-            <button class="btn btn-default blue" type='button'  onclick="add_save()">
+            <button class="btn btn-default blue" type='button' onclick="add_save()">
                 <span class="glyphicon glyphicon-remove"><i class="icon-ok"></i>保存</span>
             </button>
             <button class="btn btn-default" type='button' data-dismiss='modal'>
@@ -89,7 +94,7 @@
     </div>
 </div>
 <script>
-    $(document).on("mousedown", function (e) {
+    $(document).on("mousedown", function(e) {
         var e = e || window.event; //浏览器兼容性
         var elem = e.target || e.srcElement;
         while (elem) { //循环判断至跟节点，防止点击的是div子元素

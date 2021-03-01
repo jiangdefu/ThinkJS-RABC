@@ -1,0 +1,97 @@
+{% extends "../base/main.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
+<link rel="stylesheet" href="/static/common/plugins/bootstrap-datetimepicker/css/datetimepicker.css" />
+{% endblock %}
+{% block content %}
+
+<div id="dashboard">
+    <section class="vbox">
+        <section class="scrollable wrapper">
+            <form action="" id="search" style="margin-bottom: 0;">
+                <div class="form-group row">
+                    <label for="user_name" class="col-sm-1 control-label">用户名</label>
+                    <input type="text" class="col-sm-2 form-control" id="user_name" name="user_name"/>
+                    <label for="user_ip" class="col-sm-1 control-label">IP</label>
+                    <input type="text" class="form-control col-sm-2" id="user_ip" name="user_ip" />
+                    <label for="user_url" class="col-sm-1 control-label">操作地址</label>
+                    <input type="text" class="form-control col-sm-2" id="user_url" name="user_url"/>
+                    <div class="col-sm-1" style="text-align: right">
+                        <button type="button" id="demand" class="btn btn-default" style="padding: 5px 14px;">查询</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="startDate" class="col-sm-1 control-label">时间（起）</label>
+                    <input type="text" class="form-control col-sm-2" id="startDate" name="startDate" readonly/>
+                    <label for="endDate" class="col-sm-1 control-label">时间（止）</label>
+                    <input type="text" class="form-control col-sm-2" id="endDate" name="endDate" readonly/>
+                </div>
+            </form>
+            <header class="bg-light dk">
+                <div id="toolbar">
+                </div>
+            </header>
+            <div id="index">
+                <style>
+                    .table th, .table td{
+                        text-align: center;
+                    }
+                </style>
+                <div class="">
+                    <table id="log"
+                           data-toggle='table' data-url='/admin/log/loadlog' data-method='post'
+                           data-toolbar='#toolbar' data-striped='true' data-show-refresh='true'
+                           data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                           data-query-params='queryParams' data-show-toggle="true">
+                        <thead>
+                        <tr>
+                            <th data-field='username'>用户名</th>
+                            <th data-field='ip'>IP地址</th>
+                            <th data-field='url'>地址</th>
+                            <th data-field='create_time' data-formatter="dateFormatterH">创建时间</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+<!-- END PAGE CONTAINER-->
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table.js"></script>
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/static/common/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="/static/common/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+    // 表格过滤条件
+    function queryParams(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "ip":$("input[name='user_ip']").val(),
+            "address":$("input[name='user_url']").val(),
+            "startTime":$("input[name='startDate']").val(),
+            "endTime":$("input[name='endDate']").val(),
+            "pid":"{{pid}}",
+            "param":params.search
+        };
+        return temp;
+    }
+    function dateFormatterH(value, row, index) {
+        return [
+            new Date(value).Format("yyyy-MM-dd hh:mm:ss")
+        ];
+    }
+    $(function(){
+        setDate("startDate");
+        setDate("endDate");
+        $("#demand").click(function () {//查询按钮
+            $('#log').bootstrapTable('getOptions').pageNumber = 1;
+            $('#log').bootstrapTable('refresh');
+        });
+    })
+</script>
+{% endblock %}

@@ -212,7 +212,7 @@
                         mid.push(element.id);
                     });
                 }
-                alloc(gstatus,currentUserRow.id,mid,join(","));
+                alloc(gstatus,currentUserRow.id,mid.join(","));
             }
             else{
                 toastr.warning("未选择操作用户，请选择操作用户！");

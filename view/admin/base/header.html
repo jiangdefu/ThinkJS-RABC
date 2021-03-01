@@ -3,7 +3,7 @@
     <div class="navbar-inner">
         <div class="container-fluid">
             <!-- BEGIN LOGO -->
-            <a class="brand" href="index.html">
+            <a class="brand" href="/">
             <img src="{{'sys_sys_logo'|get_dict_code}}" alt="logo" />
             </a>
             <!-- END LOGO -->
@@ -17,86 +17,31 @@
                 <!-- BEGIN NOTIFICATION DROPDOWN -->   
                 <li class="dropdown" id="header_notification_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <i class="icon-warning-sign"></i>
-                    <span class="badge">6</span>
+                        <i class="fa fa-database" style="display: flex;align-items: center;">
+                            {% if controller.environment=='mysqlDev' %}
+                            <span style="font-size:14px;" id="environment"> &nbsp;&nbsp;研发环境(10.139.13.128)</span>
+                            {% elseif controller.environment=='mysql1' %}
+                            <span style="font-size:14px;" id="environment"> &nbsp;&nbsp;测试一环境(10.253.51.23)</span>
+                            {% elseif controller.environment=='mysql2' %}
+                            <span style="font-size:14px;" id="environment"> &nbsp;&nbsp;测试二环境(10.253.91.125)</span>
+                            {% endif %}
+                            <i class="icon-angle-down"></i>
+                        </i>
                     </a>
                     <ul class="dropdown-menu extended notification">
-                        <li>
-                            <p>You have 14 new notifications</p>
-                        </li>
-                        <li>
-                            <ul class="dropdown-menu-list scroller" style="height:250px">
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-success"><i class="icon-plus"></i></span>
-                                    New user registered. 
-                                    <span class="time">Just now</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Server #12 overloaded. 
-                                    <span class="time">15 mins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-warning"><i class="icon-bell"></i></span>
-                                    Server #2 not responding.
-                                    <span class="time">22 mins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                                    Application error.
-                                    <span class="time">40 mins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Database overloaded 68%. 
-                                    <span class="time">2 hrs</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    2 user IP blocked.
-                                    <span class="time">5 hrs</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-warning"><i class="icon-bell"></i></span>
-                                    Storage Server #4 not responding.
-                                    <span class="time">45 mins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                                    System Error.
-                                    <span class="time">55 mins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Database overloaded 68%. 
-                                    <span class="time">2 hrs</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="external">
-                            <a href="#">See all notifications <i class="m-icon-swapright"></i></a>
-                        </li>
+                        <!-- <li>
+                            <p>切换测试环境(数据库)</p>
+                        </li> -->
+                        <li><a href="/admin/user/change" data-value='mysqlDev' data-toggle='env'><i class="icon-th"></i>研发环境(10.139.13.128)</a></li>
+                        <li><a href="/admin/user/change" data-value='mysql1'  data-toggle='env'><i class="icon-th"></i>测试一环境(10.253.51.23)</a></li>
+                        <li><a href="/admin/user/change" data-value='mysql2'  data-toggle='env'><i class="icon-th"></i>测试二环境(10.253.91.125)</a></li>
+                        <!-- <li class="external">
+                            <a href="/"><i class="m-icon-swapright"></i></a>
+                        </li> -->
                     </ul>
-                </li>
+                </li> 
                 <!-- END NOTIFICATION DROPDOWN -->
+                
                 <!-- BEGIN INBOX DROPDOWN -->
                 <li class="dropdown" id="header_inbox_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -105,78 +50,7 @@
                     </a>
                     <ul class="dropdown-menu extended inbox">
                         <li>
-                            <p>You have 12 new messages</p>
-                        </li>
-                        <li>
-                            <ul class="dropdown-menu-list scroller" style="height:250px">
-                                <li>
-                                    <a href="inbox.html?a=view">
-                                    <span class="photo"><img src=".//static/common/img/avatar2.jpg" alt="" /></span>
-                                    <span class="subject">
-                                    <span class="from">Lisa Wong</span>
-                                    <span class="time">Just Now</span>
-                                    </span>
-                                    <span class="message">
-                                    Vivamus sed auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
-                                    </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="inbox.html?a=view">
-                                    <span class="photo"><img src=".//static/common/img/avatar3.jpg" alt="" /></span>
-                                    <span class="subject">
-                                    <span class="from">Richard Doe</span>
-                                    <span class="time">16 mins</span>
-                                    </span>
-                                    <span class="message">
-                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
-                                    </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="inbox.html?a=view">
-                                    <span class="photo"><img src=".//static/common/img/avatar1.jpg" alt="" /></span>
-                                    <span class="subject">
-                                    <span class="from">Bob Nilson</span>
-                                    <span class="time">2 hrs</span>
-                                    </span>
-                                    <span class="message">
-                                    Vivamus sed nibh auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
-                                    </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="inbox.html?a=view">
-                                    <span class="photo"><img src=".//static/common/img/avatar2.jpg" alt="" /></span>
-                                    <span class="subject">
-                                    <span class="from">Lisa Wong</span>
-                                    <span class="time">40 mins</span>
-                                    </span>
-                                    <span class="message">
-                                    Vivamus sed auctor 40% nibh congue nibh...
-                                    </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="inbox.html?a=view">
-                                    <span class="photo"><img src=".//static/common/img/avatar3.jpg" alt="" /></span>
-                                    <span class="subject">
-                                    <span class="from">Richard Doe</span>
-                                    <span class="time">46 mins</span>
-                                    </span>
-                                    <span class="message">
-                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
-                                    </span>  
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="external">
-                            <a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
+                            <p>你有5条未读消息</p>
                         </li>
                     </ul>
                 </li>
@@ -189,10 +63,10 @@
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li>
-                            <p>You have 12 pending tasks</p>
+                            <p>你有5条工作任务待开展</p>
                         </li>
                         <li>
-                            <ul class="dropdown-menu-list scroller"  style="height:250px">
+                            <ul class="dropdown-menu-list scroller"  style="height:230px">
                                 <li>
                                     <a href="#">
                                     <span class="task">
@@ -237,53 +111,21 @@
                                     </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="task">
-                                    <span class="desc">Web server upgrade</span>
-                                    <span class="percent">58%</span>
-                                    </span>
-                                    <span class="progress progress-info">
-                                    <span style="width: 58%;" class="bar"></span>
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="task">
-                                    <span class="desc">Mobile development</span>
-                                    <span class="percent">85%</span>
-                                    </span>
-                                    <span class="progress progress-success">
-                                    <span style="width: 85%;" class="bar"></span>
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="task">
-                                    <span class="desc">New UI release</span>
-                                    <span class="percent">18%</span>
-                                    </span>
-                                    <span class="progress progress-important">
-                                    <span style="width: 18%;" class="bar"></span>
-                                    </span>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="external">
-                            <a href="#">See all tasks <i class="m-icon-swapright"></i></a>
+                            <a href="#">查看全部<i class="m-icon-swapright"></i></a>
                         </li>
                     </ul>
                 </li>
-                <!-- END TODO DROPDOWN -->               
+                <!-- END TODO DROPDOWN --> 
+                             
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img alt="" src="/static/common/img/user_man_32.png" style="background-color: #fff;border-radius: 50% !important;vertical-align: middle;"/>
-                    <span class="username"> Admin</span>
-                    <i class="icon-angle-down"></i>
+                        <img alt="" src="/static/common/img/user_man_32.png" style="background-color: #fff;border-radius: 50% !important;vertical-align: middle;"/>
+                        <span class="username">{{controller.user.username}}</span>
+                        <i class="icon-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="extra_profile.html"><i class="icon-user"></i> 个人信息</a></li>

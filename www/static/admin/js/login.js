@@ -168,8 +168,9 @@ var Login = function () {
 	        });
 
 	        jQuery('#forget-password').click(function () {
-	            jQuery('.login-form').hide();
-	            jQuery('.forget-form').show();
+	            // jQuery('.login-form').hide();
+	            // jQuery('.forget-form').show();
+							toastr.warning('系统暂不支持该功能');
 	        });
 
 	        jQuery('#back-btn').click(function () {
@@ -288,8 +289,9 @@ var Login = function () {
 	        });
 
 	        jQuery('#register-btn').click(function () {
-	            jQuery('.login-form').hide();
-	            jQuery('.register-form').show();
+	            // jQuery('.login-form').hide();
+	            // jQuery('.register-form').show();
+							toastr.warning('系统暂不支持该功能');
 	        });
 
 	        jQuery('#register-back-btn').click(function () {

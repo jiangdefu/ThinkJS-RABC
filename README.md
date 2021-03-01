@@ -4,11 +4,11 @@ ThinkJS-RABC 是一款基于[ThinkJS](https://thinkjs.org/)框架开发的简易
 [NodeJS](https://nodejs.org/)，版本大于6.0  <br />
 [MySQL](https://www.mysql.com/)，版本大于5.5
 # 启动运行
-克隆代码后进入根目录，运行 npm install 安装依赖文件。<br />
+克隆代码后进入代码根目录，运行 npm install 安装依赖文件。<br />
 打开MySQL创建数据库rabc，执行think-rabc.sql里面的语句创建表结构，然后分别执行其他的sql文件里面的语句插入基础数据。<br />
 打开项目文件src/common/config/db.js配置数据库连接信息<br /> 
 ``` 
-    host:'127.0.0.1',                  //主机信息
+    host:'127.0.0.1',                   //主机信息
     port: '3306',                       //连接端口
     database: 'rabc',                   //数据库名称
     user: 'root',                       //用户名

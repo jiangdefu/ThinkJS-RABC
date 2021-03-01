@@ -1,0 +1,131 @@
+{% extends "../base/main.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/common/css/bootstrap-table.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/metroStyle/metroStyle.css" />
+<link rel="stylesheet" href="/static/common/plugins/zTree/css/demo.css" />
+{% endblock %}
+{% block content %}
+<div class="row" style="min-height: 500px;">
+  <div class="col-sm-12" style="min-height: 500px;box-sizing: border-box;">
+      <div class="portlet box" style="height: 100%;">
+          <div class="portlet-title" style="background-color:green">
+              <div class="caption"><i class="icon-reorder" style="color: #fff;"></i>资费列表</div>
+              <div class="tools">
+                <div class="actions">
+                    <button id="search" class="btn blue"><i class="icon-search"></i> 查询</button>
+                </div>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <div id="toolbar">
+                <form action="#" class="form-horizontal">
+                    <div class="row-fluid">
+                        
+                      <div class="span4">
+                          <div class="control-group">
+                              <label class="control-label">商品ID</label>
+                              <div class="controls">
+                                  <input type="text" id="offer_id" class="form-control span12" value="{{offer_id}}" placeholder="请输入商品ID">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                          <div class="control-group">
+                              <label class="control-label">规格ID</label>
+                              <div class="controls">
+                                  <input type="text" id="cha_group_id" class="form-control span12" placeholder="请输入规格ID">
+                              </div>
+                          </div>
+                      </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">资费ID</label>
+                                <div class="controls">
+                                  <input type="text" id="price_id" class="form-control span12" placeholder="请输入资费ID">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+              <style>
+                  .portlet > .portlet-title > .caption{
+                    line-height: 26px;
+                  }
+                  .portlet.box .portlet-title .tools {
+                      margin-top:0px;
+                  }
+                  .form-horizontal .control-label{
+                      width: 60px;
+                  }
+                  .form-horizontal .controls{
+                    margin-left: 70px;
+                  }
+                  .bs-bars{
+                      width: 70%;
+                  }
+                  .table th, .table td{
+                      text-align: center;
+                      font-size:13px;
+                  }
+              </style>
+              <table id="userTable"
+                     data-toggle='table' data-url='/admin/product/loadprice' data-method='get'
+                     data-toolbar='#toolbar' data-striped='true' data-show-refresh='true'
+                     data-pagination='true' data-side-pagination='server' data-click-to-select='true'
+                     data-query-params='queryParams' data-search="true" data-show-toggle="true" data-seachplaceholder="请输入资费名称">
+                  <thead>
+                  <tr>
+                    <th data-field='PRICE_NAME'>资费名称</th>
+                    <th data-field='PRICE_ID'>资费ID</th>
+                    <th data-field='OFFER_ID'>商品编码</th>
+                    <th data-field='OFFER_NAME'>商品名称</th>
+                    <th data-field='CHA_GROUP_NAME'>规格名称</th>
+                    <th data-field='CHA_GROUP_ID'>规格ID</th>
+                    
+                    <th data-field='STATUS_TEXT' data-formatter="statusFormat">资费状态</th>
+                    <th data-formatter="operation">操作</th>
+                  </tr>
+                  </thead>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal"></div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table.js"></script>
+<script type="text/javascript" src="/static/common/scripts/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/static/common/plugins/zTree/js/jquery.ztree.all.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#search").click(function(){
+            $('#userTable').bootstrapTable('refresh');
+        })
+    })
+    // 表格过滤条件
+    function queryParams(params) {
+        var temp = {
+            "limit": params.limit,
+            "offset": params.offset,
+            "sort": params.sort,
+            "cha_group_id":$("#cha_group_id").val(),
+            "offer_id":$("#offer_id").val(),
+            "price_id":$("#price_id").val(),
+            "param":params.search
+        };
+        return temp;
+    };
+    function operation(value, row, index) {
+        // var s = "<a class='btn label-success mini' href='/admin/product/chagroup?offer_id="+row.OFFER_ID+"'><i class='icon-pencil'></i>&nbsp;规格</a>&nbsp;&nbsp;";
+        // var b = "<a class='btn label-warning mini' href='/admin/product/price?offer_id="+row.OFFER_ID+"'><i class='icon-pencil'></i>&nbsp;资费</a>";
+        // return s+b;
+        return "";
+    }
+    function statusFormat(value,row,index){
+        return "<a href='/admin/product/pricestatus?relation_id="+row.RELATION_ID+"&status="+row.STATUS+"' data-value='"+row.STATUS+"' data-id='"+row.RELATION_ID+"' data-toggle='dstatus'>"+value+"("+row.STATUS+")</a>";
+    }
+   
+</script>
+{% endblock %}

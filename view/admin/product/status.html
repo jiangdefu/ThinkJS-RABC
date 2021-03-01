@@ -1,0 +1,90 @@
+
+<div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button class="close" type='button' data-dismiss='modal' aria-hidden='true'></button>
+          <h4 class="modal-title" id="ajaxModal">变更产品状态 </h4>
+      </div>
+      <div class="modal-body">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+
+              </div>
+              <div class="panel-body">
+                  <form id="add_user_group_form" action="" class="form-horizontal">
+                    <div class="row-fluid">
+                      <div class="span12 ">
+                        <div class="control-group">
+                          <label class="control-label">产品状态</label>
+                          <input type="hidden" id="offer_id" name="offer_id" value="{{offer_id}}">
+                          <div class="controls" style="line-height:33px;"> 
+                            {% if offerstatus and offerstatus.length>0 %}
+                              {% for item in offerstatus %}
+                              {% if item.PARA_VALUE==status %}                                        
+                                  <input type="radio" name="status" style="height: 15px;vertical-align: bottom;margin-bottom: 9px;margin-left: 15px;" checked="checked" value="{{item.PARA_VALUE}}">
+                                  {{item.PARA_NAME}}
+                                {% else %}
+                                  <input type="radio" name="status" style="height: 15px;vertical-align: bottom;margin-bottom: 9px;margin-left: 15px;" value="{{item.PARA_VALUE}}">
+                                  {{item.PARA_NAME}}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                            <span class="help-block" style="font-size: 13px; margin-left: 15px;color: #adabab;margin-top: 0px !important;"><i class="fa fa-info-circle"></i>&nbsp;该操作会影响到他人测试，请确认后谨慎操作</span>
+                            </label>  
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button id="add_close" type="button" data-dismiss='modal' style="display: none;"></button>
+          <button class="btn btn-default blue" type='button' id="updateBtn" onclick="add_save()">
+              <span class="glyphicon glyphicon-remove"> <i id="loading" class="icon-ok"></i>保存</span>
+          </button>
+          <button class="btn btn-default" type='button' data-dismiss='modal'>
+              <span class="glyphicon glyphicon-remove">取消</span>
+          </button>
+      </div>
+  </div>
+</div>
+<style>
+  .move {
+    animation: myMove 1s ease-in infinite;
+    -webkit-animation: myMove 1s ease-in infinite;
+  }
+  @keyframes myMove {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+  }
+  
+  @-webkit-keyframes myMove {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+  }
+</style>
+<script>
+  function add_save() {
+      $("#loading").removeClass("icon-ok");
+      $("#loading").addClass("fa fa-spinner move");
+      $("#updateBtn").attr("disabled","disabled");
+      var data = $("#add_user_group_form").serializeObject();
+      $.ajax({
+          type: "post",
+          dataType: "json",
+          url: "/admin/product/updatestatus",
+          data: data,
+          success: function (res) {
+              if(res.status==1){
+                  $("#add_close").click();
+                  $('#userTable').bootstrapTable('refresh');
+              }else{
+                  toastr.warning(res.msg);
+              }
+          }
+      })
+  }
+</script>

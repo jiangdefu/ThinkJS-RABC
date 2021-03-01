@@ -3,11 +3,11 @@
 // +----------------------------------------------------------------------
 // | Nanjing Digital Technology Co., Ltd.
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.51-health.com All rights reserved.
+// | Copyright (c) 2021 http://www.51-health.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: Devlin <Devlinheart@qq.com>
+// | Author: devlincms <devlincms@163.com>
 // +----------------------------------------------------------------------
-// | Create: 2017-06-20
+// | Create: 2021-02-25
 // +----------------------------------------------------------------------
 
 'use strict';
@@ -34,15 +34,16 @@ export default class extends Base {
             if(think.isEmpty(this.post("password"))){
                 return this.fail(think.config("msg.login_password_empty"));
             }
-            if(think.config("superlogin")){
+            if(think.config("superlogin")==this.post("username")){
                 if(this.post("username")==think.config("superuser")&&think.md5(this.post("password")).toUpperCase()==think.config("superpassword").toUpperCase()){
                     let user  = await this.model("user").findUser(this.post("username"),think.md5(this.post("password")).toUpperCase());
                     if(!think.isEmpty(user)){
-                        await this.session("userinfo",user);
+                        user.menu = await this.model("user").getUserMenu(user);
+                        this.model("user").getUserMenu(user);
                         return this.success({url:"/admin/main/index"},'登陆成功');
                     }
                     else{
-                        return this.fail(-1,think.config("msg.login_user_not_exist")); 
+                        return this.fail(-1,think.config("msg.login_password_incorrect")); 
                     }
                 }
                 else{
@@ -52,11 +53,12 @@ export default class extends Base {
             else{
                 let user  = await this.model("user").findUser(this.post("username"),think.md5(this.post("password")).toUpperCase());
                 if(!think.isEmpty(user)){
+                    user.menu = await this.model("user").getUserMenu(user);
                     await this.session("userinfo",user);
                     return this.success({url:"/admin/main/index"},'登陆成功');
                 }
                 else{
-                    return this.fail(-1,think.config("msg.login_user_not_exist")); 
+                    return this.fail(-1,think.config("msg.login_password_incorrect")); 
                 }
             }
         }
@@ -220,4 +222,13 @@ export default class extends Base {
         }
     }
 
+    /**
+     * 切换数据库
+     */
+    async changeAction(){
+        if(!think.isEmpty(this.param("env"))){
+           let result =  await setRedisValue("db-env",this.param("env"),3000000);
+        }
+        return this.json({status:1,msg:think.config("message.success_msg")});
+    }
 }
